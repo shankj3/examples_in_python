@@ -1,0 +1,13 @@
+<web:acsCatairRecords>A3027231MCK00108191501                                     8283840-3 ELP9697    </web:acsCatairRecords>
+<web:acsCatairRecords>B012402231EI                              1L                         SH         </web:acsCatairRecords>
+<web:acsCatairRecords>10R240259-3468917JU59-3468917JU                 8081215   231 8283840331035  TX </web:acsCatairRecords>
+<web:acsCatairRecords>20                                     71L0036761L                     V894     </web:acsCatairRecords>
+<web:acsCatairRecords>30                  231478688832402110              2082115             MSCU    </web:acsCatairRecords>
+<web:acsCatairRecords>40001RO00000034090000000324                    000000350042870          INV001  </web:acsCatairRecords>
+<web:acsCatairRecords>50 87089520000000008523000001068100NO                               RO073115Y   </web:acsCatairRecords>
+<web:acsCatairRecords>60                                        ROALTTEC648LUP                        </web:acsCatairRecords>
+<web:acsCatairRecords>62          49900001181                                                         </web:acsCatairRecords>
+<web:acsCatairRecords>8949900000002500                                                                </web:acsCatairRecords>
+<web:acsCatairRecords>9000000008523             000000000000000000000000000002500                     </web:acsCatairRecords>
+<web:acsCatairRecords>Y  2402231EI00009000000008523                                        SH         </web:acsCatairRecords>
+<web:acsCatairRecords>Z3027231MCK00108191501                                     8283840-3 ELP9697    </web:acsCatairRecords>
