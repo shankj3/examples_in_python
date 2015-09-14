@@ -17,7 +17,6 @@ for c in courses:
 text_file = os.path.abspath(os.path.join('data','sms-20150818063128.xml'))
 
 text = etree.parse(text_file)
-
 root = dom.getroot()
 for body in root.findall('course'):
 	reg = body.find('reg_num').text

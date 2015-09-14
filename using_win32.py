@@ -1,4 +1,4 @@
-
+#i don't think this is worth it.. the variability in the docs/how much their versions would differ from each other in semantics would make it very difficult to smartly approach this.
 import win32com.client as win32
 '''
 word = win32.Dispatch("Word.Application")
@@ -41,10 +41,11 @@ a = table.Cell(Row=1,Column=1).Range.Text
 AllTables = {}
 for i in range(1,doc.Tables.Count - 1,1):
     table = doc.Tables(i)
-    AllTables['Table%s'%i] = table
+    AllTables['%s'%i] = table
 InputValues = {}
 for key in AllTables:
 #    print(AllTables[key].Cell(Row=1,Column=1).Range.Text)
     if "Input" in AllTables[key].Cell(Row=1,Column=1).Range.Text:
         InputValues[key] = AllTables[key]
-#print(len(InputValues), len(AllTables))
+print(InputValues['11'].Cell(Row=1,Column=1).Range.Text)
+

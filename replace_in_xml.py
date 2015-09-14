@@ -68,7 +68,7 @@ def change_testid(doc, number):
     next.set('id',number)
 #    testCase.write('CustomsWebServiceBranch_%s.xml'%number)
     print(next.attrib)
-change_testid('CustomsWebServiceBranch_015-024-0001.xml', '000-000-0000')
+#change_testid('CustomsWebServiceBranch_015-024-0001.xml', '000-000-0000')
 
 
 files = ['CustomsWebServiceBranch_015-0%s-0001.xml' %i for i in range(16,24,1)]
@@ -119,10 +119,17 @@ def change_catair(doc):
     ex = etree.parse(doc, parser)
     root = ex.getroot()
     catair = root.findall('./{http://schemas.xmlsoap.org/soap/envelope/}Body/{urn:com:expd:customs:us:servicewrappers}load7501FromCatair/{urn:com:expd:customs:us:servicewrappers}in/{urn:com:expd:customs:us:webservices}acsCatairRecords', namespaces=namespaces)
+    acecatair = root.findall('./env:Body/wrap:load7501FromCatair/wrap:in/web:aceAdditionalDataRecords', namespaces=namespaces)
+    catairout = []
     for line in catair:
-        run_everything(line)
-    ex.write('variableinsert_out.xml')
-change_catair(doc)
+        catairout.append(line.text)
+#    for a in acecatair:
+#        catairout.append(a.text)
+    return catairout
+    #ex.write('variableinsert_out.xml')
+a = change_catair(doc)
+for i in a:
+    i = list(i)
 
 
 def change_testid(doc, number):
@@ -135,7 +142,40 @@ def change_testid(doc, number):
     root.set('id',number)
     next = root.find('./testRequest/testRequestHttpBody/env:Envelope', namespaces)
     next.set('id',number)
-#    testCase.write('CustomsWebServiceBranch_%s.xml'%number)
+    testCase.write('CustomsWebServiceBranch_%s.xml'%number)
     print(next.attrib)
+#change_testid('CustomsWebServiceBranch_015-100-1001.xml','015-100-1001')
+
+se11 = {'filercode':[1,5]}
+#print(se11['filercode'][1])
 
 
+def a_line(line):
+    for indi in line:
+        if indi.startswith('A'):
+        #want to have this check against the varmap to make sure these slices exist there, way of making sure the fixed width is ok 
+        #also if it is in the varmap, could you replace the number with the variable? that way if any variables change or something happens, would be able to accomodate that. 
+            individual = indi.replace(indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]], d.A['cbp_port_code'][0]).replace(indi[d.A['filer_code'][1]:d.A['filer_code'][2]], d.A['filer_code'][0]).replace(indi[d.A['mck_code'][1]:d.A['mck_code'][2]], d.A['mck_code'][0]).replace(indi[d.A['date_comp'][1]:d.A['date_comp'][2]], d.A['date_comp'][0]).replace(indi[d.A['saved_fen_uncomp'][1]:d.A['saved_fen_uncomp'][2]], d.A['saved_fen_uncomp'][0]).replace(indi[d.A['branch_code'][1]:d.A['branch_code'][2]], d.A['branch_code'][0])
+            print(individual)
+#            list_indi = list(individual)
+#            list_indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]] = d.A['cbp_port_code'][0]
+#            list_indi[d.A['filer_code'][1]:d.A['filer_code'][2]] = d.A['filer_cde'][0]
+#            list_indi[d.A['mck_code'][1]:d.A['mck_code'][2]] = d.A['mck_code'][0]
+#            list_indi[d.A['date_comp'][1]:d.A['date_comp'][2]] = d.A['date_comp'][0]
+#            variabalized = ''.join(list_indi)
+#            print(variabalized)
+
+def b_line(line):
+    if line.text.startswith('B'):
+        line.text = line.text[:2]+ 'asldfjk'
+
+
+import line_rules as d
+import re
+
+
+def replace(diction, st):
+    for i,y in d.A.items(): 
+        
+        return newstr
+a_line(a)
