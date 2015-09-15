@@ -155,15 +155,15 @@ def a_line(line):
         if indi.startswith('A'):
         #want to have this check against the varmap to make sure these slices exist there, way of making sure the fixed width is ok 
         #also if it is in the varmap, could you replace the number with the variable? that way if any variables change or something happens, would be able to accomodate that. 
-            individual = indi.replace(indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]], d.A['cbp_port_code'][0]).replace(indi[d.A['filer_code'][1]:d.A['filer_code'][2]], d.A['filer_code'][0]).replace(indi[d.A['mck_code'][1]:d.A['mck_code'][2]], d.A['mck_code'][0]).replace(indi[d.A['date_comp'][1]:d.A['date_comp'][2]], d.A['date_comp'][0]).replace(indi[d.A['saved_fen_uncomp'][1]:d.A['saved_fen_uncomp'][2]], d.A['saved_fen_uncomp'][0]).replace(indi[d.A['branch_code'][1]:d.A['branch_code'][2]], d.A['branch_code'][0])
-            print(individual)
-#            list_indi = list(individual)
-#            list_indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]] = d.A['cbp_port_code'][0]
-#            list_indi[d.A['filer_code'][1]:d.A['filer_code'][2]] = d.A['filer_cde'][0]
-#            list_indi[d.A['mck_code'][1]:d.A['mck_code'][2]] = d.A['mck_code'][0]
-#            list_indi[d.A['date_comp'][1]:d.A['date_comp'][2]] = d.A['date_comp'][0]
-#            variabalized = ''.join(list_indi)
-#            print(variabalized)
+#            individual = indi.replace(indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]], d.A['cbp_port_code'][0]).replace(indi[d.A['filer_code'][1]:d.A['filer_code'][2]], d.A['filer_code'][0]).replace(indi[d.A['mck_code'][1]:d.A['mck_code'][2]], d.A['mck_code'][0]).replace(indi[d.A['date_comp'][1]:d.A['date_comp'][2]], d.A['date_comp'][0]).replace(indi[d.A['saved_fen_uncomp'][1]:d.A['saved_fen_uncomp'][2]], d.A['saved_fen_uncomp'][0]).replace(indi[d.A['branch_code'][1]:d.A['branch_code'][2]], d.A['branch_code'][0])
+#            print(individual)
+            list_indi = list(indi)
+            list_indi[d.A['date_comp'][1]:d.A['date_comp'][2]] = d.A['date_comp'][0]
+            list_indi[d.A['mck_code'][1]:d.A['mck_code'][2]] = d.A['mck_code'][0]
+            list_indi[d.A['filer_code'][1]:d.A['filer_code'][2]] = d.A['filer_code'][0]
+            list_indi[d.A['cbp_port_code'][1]:d.A['cbp_port_code'][2]] = d.A['cbp_port_code'][0]
+            variabalized = ''.join(list_indi)
+            print(variabalized)
 
 def b_line(line):
     if line.text.startswith('B'):
