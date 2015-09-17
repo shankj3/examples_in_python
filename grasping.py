@@ -30,17 +30,23 @@ acscatair = {
     'export_date':['{{ export_date }}',70,76]
 }
 }
+
+
+
 import xml.etree.ElementTree as etree
 import collections as c
 doc = 'sample_for_test.xml'
 parser = etree.XMLParser(encoding='utf-8')
 testCase = etree.parse(doc, parser)
-az = c.OrderedDict(sorted(acscatair['AZ'].items(),key=lambda t: t[0]))
+print acscatair.items()[0][1]
+az = c.OrderedDict(sorted(acscatair.items(), key=lambda x: x[1].values()[0]))
+
 
 class ReplaceLines(object):
     def __init__(self, testCase,acs_line_values):
         self.testCase = testCase
         self.acs_line_values = acs_line_values
+
     namespace = {
         "wrap": "urn:com:expd:customs:us:servicewrappers",
         "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
@@ -53,8 +59,28 @@ class ReplaceLines(object):
     def get_necessary_lines(self):
         root = self.testCase.getroot()
         acs_catair_lines = root.findall('./env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespaces = self.namespace)
-    def tryit_(self):
-        print(self.acs_catair_lines)
+        ace_catair_lines = root.findall('./env:Body/wrap:load7501FromCatair/wrap:in/wrap:aceAdditionalDataRecords', namespaces = self.namespace)
+        branch_code = root.find('./env:Body/wrap:load7501FromCatair/wrap:in/web:branch_code', namespaces = self.namespace)
+        formal_entry_no = root.find('./env:Body/wrap:load7501FromCatair/wrap:in/web:formalEntryNo', namespaces = self.namespace)
+        legacy_file_no = root.find('./env:Body/wrap:load7501FromCatair/wrap:in/web:legacyFileNo', namespaces = self.namespace)
+        filercode = root.find('./env:Body/wrap:load7501FromCatair/wrap:in/web:filerCode', namespaces = self.namespace)
+        return acs_catair_lines, ace_catair_lines, branch_code, formal_entry_no, legacy_file_no, filercode
 
-acs = ReplaceLines(testCase,acscatair)
+    def deal_with_acs(self):
+        parsed_acs = []
+        root = self.testCase.getroot()
+        acs_catair_lines = root.findall('./env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespaces = self.namespace)
+        for line in acs_catair_lines:
+            if line.text.startswith('A'):
+                line = list(line.text)
+                for repl in self.acs_line_values['AZ']: #this won't take the order it is supposed to. see if there is anything new in 3.0 that can deal with this. 
+                    print self.acs_line_values['AZ'][repl][0]
+                    line[self.acs_line_values['AZ'][repl][1]:self.acs_line_values['AZ'][repl][2]] = self.acs_line_values['AZ'][repl][0]
+                string = ''.join(line)
+                parsed_acs.append(string)
+        print parsed_acs
+
+
+
+
 
