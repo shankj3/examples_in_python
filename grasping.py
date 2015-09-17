@@ -1,33 +1,35 @@
+
+
 acscatair = {
     'AZ' :{
-    '1':['{{ branch_code }}',69,72],
-    '2':['{{ saved_fen_uncomp }}',59,68],
-    '3':['{{ date_comp }}',14,20],
-    '4':['{{ mck_code }}',8,14],
-    '5':['{{ filer_code }}',5,8],
-    '6':['{{ cbp_port_code }}',1,5],
+    '1':['{{ branch_code }}',(slice(69,72))],
+    '2':['{{ saved_fen_uncomp }}',slice(59,68)]
+    '3':['{{ date_comp }}',slice(14,20)],
+    '4':['{{ mck_code }}',slice(8,14)],
+    '5':['{{ filer_code }}',(slice(5,8)],
+    '6':['{{ cbp_port_code }}',slice(1,5)],
 },
     'BY':{
-    '1':['{{ filer_code }}',7,10],
-    '2':['{{ port_of_entry }}',3,7]
+    '1':['{{ filer_code }}',slice(7,10)],
+    '2':['{{ port_of_entry }}',slice(3,7)]
 
 },
     '10':{
-    'port_of_entry':['{{ port_of_entry }}',3,7],
-    'est_entry_date':['{{ est_entry_date }}',49,55],
-    'filer_code':['{{ filer_code }}',58,61],
-    'first_saved_fen_comp':['{# saved_fen_comp={{ fen_comp }} #}',62,70]
+    'port_of_entry':['{{ port_of_entry }}',slice(3,7)],
+    'est_entry_date':['{{ est_entry_date }}',slice(49,55)],
+    'filer_code':['{{ filer_code }}',slice(58,61)],
+    'first_saved_fen_comp':['{# saved_fen_comp={{ fen_comp }} #}',slice(62,70)]
 },
     '20':{
-    'import_date':['{{ import_date }}',33,39],
-    'first_saved_legacy_file_no_short':['{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}',39,48],
-    'est_arrival_date':['{{ est_arrival_date }}',65,71]
+    'import_date':['{{ import_date }}',slice(33,39)],
+    'first_saved_legacy_file_no_short':['{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}',slice(39,48)]
+    'est_arrival_date':['{{ est_arrival_date }}',slice(65,71)]
 },
     '30':{
-    'prelim_stmt_date':['{{ prelim_stmt_date }}',53,59]
+    'prelim_stmt_date':['{{ prelim_stmt_date }}',slice(53,59)]
 },
     '50':{
-    'export_date':['{{ export_date }}',70,76]
+    'export_date':['{{ export_date }}',slice(70,76)]
 }
 }
 
@@ -38,8 +40,7 @@ import collections as c
 doc = 'sample_for_test.xml'
 parser = etree.XMLParser(encoding='utf-8')
 testCase = etree.parse(doc, parser)
-print acscatair.items()[0][1]
-az = c.OrderedDict(sorted(acscatair.items(), key=lambda x: x[1].values()[0]))
+az = c.OrderedDict(sorted(acscatair.items(), key=lambda x: x[0][1]))
 
 
 class ReplaceLines(object):
@@ -78,7 +79,6 @@ class ReplaceLines(object):
                     line[self.acs_line_values['AZ'][repl][1]:self.acs_line_values['AZ'][repl][2]] = self.acs_line_values['AZ'][repl][0]
                 string = ''.join(line)
                 parsed_acs.append(string)
-        print parsed_acs
 
 
 
