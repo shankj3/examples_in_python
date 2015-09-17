@@ -71,7 +71,7 @@ try1 = c.OrderedDict([
 
 import xml.etree.ElementTree as etree
 import collections as c
-doc = 'sample_for_test.xml'
+doc = 'CustomsWebServiceBranch_002-001-0001.xml'
 parser = etree.XMLParser(encoding='utf-8')
 testCase = etree.parse(doc, parser)
 az = c.OrderedDict(sorted(acscatair.items(), key=lambda x: x[0][0]))
@@ -105,9 +105,14 @@ class ReplaceLines(object):
         #do_something
 
     def replace_acs_catair(self):
+        for prefix, uri in self.namespace.items():
+            etree.register_namespace(prefix,uri)
         parsed_acs = []
         root = self.testCase.getroot()
-        acs_catair_lines = root.findall('./env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespaces = self.namespace)
+        print(root)
+        acs_catair_lines = root.findall('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespaces = self.namespace)
+        if len(acs_catair_lines) == 0:
+            print("jessi you fool, etree didn't find your values. wrong path.")
         for line in acs_catair_lines:
             line = list(line.text)
             if line[0] == 'A' or line[0] == 'Z':
@@ -141,7 +146,10 @@ class ReplaceLines(object):
             else:
                 string = ''.join(line)
                 parsed_acs.append(string)
-        return(parsed_acs)
+        for i,k in zip(acs_catair_lines,parsed_acs):
+            i.text = k
+    def replace(self):
+        self.testCase.write('CustomsWebServiceBranch_002-001-0002.xml')
 class ACS(ReplaceLines):
     def __init__(self, testCase,acs_line_values):
         self.testCase = testCase
@@ -149,5 +157,5 @@ class ACS(ReplaceLines):
 
 
 test = ReplaceLines(testCase,acscatair)
-print(test.replace_acs_catair())
-
+test.replace_acs_catair()
+test.replace()
