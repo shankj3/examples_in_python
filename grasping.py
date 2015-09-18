@@ -1,10 +1,11 @@
 import xml.etree.ElementTree as etree
 import collections as c
-doc = 'CustomsWebServiceBranch_002-001-0001.xml'
+doc = 'Sample_CustomsWebServiceBranch_XXX-XXX-XXXX.xml'
 parser = etree.XMLParser(encoding='utf-8')
 testCase = etree.parse(doc, parser)
 root = testCase.getroot()
-
+#REALLY need to check against varmap, since when certain information isn't pertinetn, it won't show up on the line. 
+# I guess though you could just have an if statment... if slice is empty don't fuck with it. 
 acscatair = {
     'AZ' :{
     '1':['{{ branch_code }}',(slice(69,72))],
@@ -26,19 +27,22 @@ acscatair = {
     '1':['{# saved_fen_comp={{ fen_comp }} #}',(slice(62,70))]
 },
     '20':{
+    '4':['{{ port_of_entry }}', (slice(29,33))],
     '3':['{{ import_date }}',(slice(33,39))],
     '2':['{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}',(slice(39,48))],
     '1':['{{ est_arrival_date }}',(slice(65,71))]
 },
     '30':{
     '1':['{{ prelim_stmt_date }}',(slice(53,59))]
+#need to add stuff for 30, for certain entry types (31,32,34,38, and prob. more) need warehouse 
+#filer cde, warehouse entry number WHICH is actually a number from the test case before (the saved_fen_uncomp), 
 },
     '50':{
     '1':['{{ export_date }}',(slice(70,76))]
 }
 }
 
-def line_replacement_by_section(line,dictionary):
+def line_replacement_by_section(line,dictionary): # add --> if the slice is empty, don't add things you shouldn't be. 
     line = list(line.text)
     for key, values in dictionary.items():
         if key == 'AZ' and (line[0] == 'A' or line[0] =='Z'): 
@@ -76,6 +80,7 @@ class ReplaceLines(object):
         "resp":"urn:expd.com:arch:core:response",
         "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
         }
+    #issue: sometimes the namespaces are different (like :us: is :us_entry:), need to account for that
     register_ns(namespace)
 
     def try_replaceACS(self):
@@ -91,12 +96,16 @@ class ReplaceLines(object):
         else:
             for i, k in zip(acs_catair_lines, parsed_acs):
                 i.text = k
-
+    def try_replaceAErecs(self):
+        root = self.testCase.getroot()
+        aerecs = root.findall('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', namespaces = self.namespace)
+        if len(aerecs) == 0:
+            print("etree didn't find any values. check paths/see if there are any variables in them.")
+        for ae in aerecs:
+            print(ae.text)
     def rewrite_TestCase(self):
         self.testCase.write('TEST_ME.xml')
 
-
-
 test = ReplaceLines(testCase,acscatair)
-test.try_replaceACS()
-test.rewrite_TestCase()
+test.try_replaceAErecs()
+#test.rewrite_TestCase()
