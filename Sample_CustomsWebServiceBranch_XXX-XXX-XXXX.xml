@@ -1,8 +1,4 @@
-<testCase id="015-013-0005" version="1.0"
- xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
- xmlns:sec="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
- xmlns:web="urn:com:expd:customs:us:webservices"
- xmlns:wrap="urn:com:expd:customs:us:servicewrappers">
+<testCase id="015-013-0005" version="1.0" xmlns:aphis="urn:com:expd:customs:us:reports:aphis:lacey" xmlns:cf7501="urn:com:expd:customs:us:reports:cf7501" xmlns:def="urn:com:expd:customs:us:reports" xmlns:domain="urn:com:expd:customs:us:domain" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fda="urn:com:expd:customs:us:reports:fda" xmlns:pest="urn:com:expd:customs:us:reports:epa:pesticides" xmlns:resp="urn:expd.com:arch:core:response" xmlns:sec="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:tsca="urn:com:expd:customs:us:reports:epa:tsca" xmlns:util="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:vne="urn:com:expd:customs:us:reports:vne" xmlns:web="urn:com:expd:customs:us:webservices" xmlns:wrap="urn:com:expd:customs:us:servicewrappers">
 	<testMetadata>
 		<testCreateName>Jessi Shank</testCreateName>
 		<testCreateDate>20150821</testCreateDate>
@@ -12,11 +8,11 @@
 		<testMaxTime>0</testMaxTime>
 		<testDelay>0</testDelay>
 		<testExecuteSqlQuery>false</testExecuteSqlQuery>
-		<testSqlColumnsToIgnore />
-		<testSqlConnectionUrl />
-		<testSqlUsername />
-		<testSqlPassword />
-		<testSqlQueries />
+		<testSqlColumnsToIgnore/>
+		<testSqlConnectionUrl/>
+		<testSqlUsername/>
+		<testSqlPassword/>
+		<testSqlQueries/>
 	</testVariables>
 	<testRequest>
 		<testRequestHttpHeader>
@@ -66,19 +62,19 @@
 							<web:acsCatairRecordCount>37</web:acsCatairRecordCount>
 							<web:aceAdditionalDataRecordCount>27</web:aceAdditionalDataRecordCount>
 							<web:acsCatairRecords>++PRIORITY SIS</web:acsCatairRecords>
-							<web:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
-							<web:acsCatairRecords>B01{{ port_of_entry }}{{ filer_code }}EI                              4N                         TQ</web:acsCatairRecords>
-							<web:acsCatairRecords>10A{{ port_of_entry }}91-10692480091-106924800                 8{{ est_entry_date }}   {{ filer_code }} {# saved_fen_comp={{ fen_comp }} #}31098  WA</web:acsCatairRecords>
-							<web:acsCatairRecords>20                           {{ port_of_entry }}{{ import_date }}{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}                 {{ est_arrival_date }}X187</web:acsCatairRecords>
-							<web:acsCatairRecords>30                  231073953303001111              1{{ prelim_stmt_date }}             AA</web:acsCatairRecords>
+							<web:acsCatairRecords>A5506231      09171501                                     0739535-5 AUS5154</web:acsCatairRecords>
+							<web:acsCatairRecords>B013001231EI                              4N                         TQ</web:acsCatairRecords>
+							<web:acsCatairRecords>10A300191-10692480091-106924800                 8091715   231 0739535531098  WA</web:acsCatairRecords>
+							<web:acsCatairRecords>20                                     219248597                       X187</web:acsCatairRecords>
+							<web:acsCatairRecords>30                  231073953303001111              1                   AA</web:acsCatairRecords>
 							<web:acsCatairRecords>40001MX00000080000000008000                    0000016625               INV001</web:acsCatairRecords>
-							<web:acsCatairRecords>50 2524900060          000000008000T                                MX{{ export_date }}N</web:acsCatairRecords>
+							<web:acsCatairRecords>50 2524900060          000000008000T                                MX090715N</web:acsCatairRecords>
 							<web:acsCatairRecords>60                                        MXALTSACHI</web:acsCatairRecords>
 							<web:acsCatairRecords>62          49900002771</web:acsCatairRecords>
 							<web:acsCatairRecords>8949900000002771</web:acsCatairRecords>
 							<web:acsCatairRecords>90                        00000000000000000000000000000277100000008000</web:acsCatairRecords>
-							<web:acsCatairRecords>Y  {{ port_of_entry }}{{ filer_code }}EI00009                                                    TQ</web:acsCatairRecords>
-							<web:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
+							<web:acsCatairRecords>Y  3001231EI00009                                                    TQ</web:acsCatairRecords>
+							<web:acsCatairRecords>Z5506231      09171501                                     0739535-5 AUS5154</web:acsCatairRecords>
 							<web:aceAdditionalDataRecords>HDR2310739535-5</web:aceAdditionalDataRecords>
 							<web:aceAdditionalDataRecords>ACM      8 XX 00TQ                                                                                                                                             WA            Dragon Graphix *Automation Client*</web:aceAdditionalDataRecords>
 							<web:aceAdditionalDataRecords>AM21234 Magister Road                 A4                                 Kent                               WA98075       00000000 00000027710000002771             NNYYN219248597 00000120PCS  00080000KMXALTSACHI     09172015ABI</web:aceAdditionalDataRecords>
@@ -118,7 +114,7 @@
 			<Date>Thu, 27 Feb 2014 21:26:46 GMT</Date>
 			<Server>Apache/1.3.41 (Unix) mod_jk/1.2.26</Server>
 			<Accept>text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</Accept>
-			<SOAPAction>""</SOAPAction>
+			<SOAPAction>&quot;&quot;</SOAPAction>
 			<Content-Length>3638</Content-Length>
 			<Keep-Alive>timeout=15, max=100</Keep-Alive>
 			<Connection>Keep-Alive</Connection>
@@ -126,7 +122,7 @@
 		</testResponseHttpHeader>
 		<testResponseHttpBody>
 			<env:Envelope>
-				<env:Header />
+				<env:Header/>
 				<env:Body>
 					<wrap:load7501FromCatairResponse>
 						<wrap:out>
