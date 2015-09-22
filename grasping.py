@@ -42,23 +42,64 @@ acscatair = {
 }
 }
 
-def line_replacement_by_section(line,dictionary): # add --> if the slice is empty, don't add things you shouldn't be. 
-    line = list(line.text)
-    for key, values in dictionary.items():
-        if key == 'AZ' and (line[0] == 'A' or line[0] =='Z'): 
-            for i in range(1, len(dictionary[key])+1):
-                line[dictionary[key]['%s' %i][1]] = dictionary[key]['%s' %i][0]
-            string = ''.join(line)
-        elif key == 'BY' and (line[0] == 'B' or line[0] == 'Y'):
-            for i in range(1, len(dictionary[key])+1):
-                line[dictionary[key]['%s' %i][1]] = dictionary[key]['%s' %i][0]
-            string = ''.join(line)
-        elif line[0]+line[1] == str(key):
-            for i in range(1, len(dictionary[key])+1):
-                line[dictionary[key]['%s' %i][1]] = dictionary[key]['%s' %i][0]
-            string = ''.join(line)
+ace_additional = {
+    'TRLHDR': {
+    '1':['{{ saved_fen_uncomp }}',(slice(6,15))],
+    '2':['{{ filer_code }}',(slice(3,6))]
+    }
+}
+
+#for aerecs, AZ and BY can be shared with acscatair.. prob. a better way to do this but not thinking about it rn.
+aerecs = {
+    'SE10':{
+    '3':['{{ filer_code }}',(slice(5,8))],
+    '2':['{{ saved_fen_comp }}',(slice(10,18))]
+    '1':['{{ port_of_entry }}',(slice(49,54))]
+    },
+    '10':{
+    '1':['{{ prelim_stmt_date }}',(slice(51,57))],
+    '2':['{{ saved_legacy_file_no_short }}',(slice(21,30))],
+    '3':['{{ port_of_entry }}',(slice(17,21))],
+    '4':['{{ saved_fen_comp }}',(slice(8,16))],
+    '5':['{{ filer_code }}',(slice(3,6))]
+    },
+    '11':{
+    '1':['{{ import_date }}',(slice(47,53))],
+    '2':['{{ est_entry_date }}',(slice(41,47))]
+    },
+    '20':{
+    '1':['{{ est_arrival_date }}',(slice(10,16))],
+    },
+    #SE16 (using ace_catair_entry_summary_create_update) says something about date of arrival, but not est.date of arrival. 
+    #so not going to worry about it right now
+    '40':{
+    '1':['{{ export_date }}',(slice(12,18))]
+    }
+
+
+
+def stuff(dictionary,key,list_of_line,line):
+    for i in range(1,len(dictionary[key])+1):
+        if line.text[dictionary[key]['%s' %i][1]] == (' '*(len(line.text[dictionary[key]['%s' %i][1]]))):
+            print(dictionary[key]['%s' %i][0],key,dictionary[key]['%s' %i][1])
         else:
-            string = ''.join(line)
+            list_of_line[dictionary[key]['%s' %i][1]] = dictionary[key]['%s' %i][0]
+    variabalized_string = ''.join(list_of_line)
+    return variabalized_string
+
+def line_replacement_by_section(line,dictionary): # add --> if the slice is empty, don't add things you shouldn't be. 
+    listed_line = list(line.text)
+    for key, values in dictionary.items():
+        if key == 'AZ' and (line.text.startswith('A') or line.text.startswith('Z')): 
+            string = stuff(dictionary,key,listed_line,line)
+        elif key == 'BY' and (line.text.startswith('B') or line.text.startswith('Y')):
+            string = stuff(dictionary,key,listed_line,line)
+        elif key == 'TRLHDR' and(line.text.startswith('TRL') or line.text.startswith('HDR')):
+            string = stuff(dictionary,key,listed_line,line)
+        elif line.text.startswith(str(key)):
+            string = stuff(dictionary,key,listed_line,line)
+        else:
+            string = ''.join(listed_line)
     return string
 def register_ns(namespace):
     for prefix, uri in namespace.items():
@@ -96,6 +137,8 @@ class ReplaceLines(object):
         else:
             for i, k in zip(acs_catair_lines, parsed_acs):
                 i.text = k
+        return i.text
+
     def try_replaceAErecs(self):
         root = self.testCase.getroot()
         aerecs = root.findall('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', namespaces = self.namespace)
@@ -103,9 +146,15 @@ class ReplaceLines(object):
             print("etree didn't find any values. check paths/see if there are any variables in them.")
         for ae in aerecs:
             print(ae.text)
+
+    def replace_in_PGA_reports(self):
+        root = self.testcase.getroot()
+        base_xpath = './testResponse/testResponseHttpBody/env:Envelope/wrap:load7501FromCatairResponse/wrap:out/web:actionValues/web:values/'
+        initialsDate = root.find('%saphis:Lacey_Form/aphis:initialsDate' %base_xpath,namespaces = self.namespaces)
+        
     def rewrite_TestCase(self):
         self.testCase.write('TEST_ME.xml')
 
 test = ReplaceLines(testCase,acscatair)
-test.try_replaceAErecs()
+#test.try_replaceACS()
 #test.rewrite_TestCase()
