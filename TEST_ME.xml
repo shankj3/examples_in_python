@@ -66,11 +66,11 @@
 							<web:acsCatairRecordCount>37</web:acsCatairRecordCount>
 							<web:aceAdditionalDataRecordCount>27</web:aceAdditionalDataRecordCount>
 							<web:acsCatairRecords>++PRIORITY SIS</web:acsCatairRecords>
-							<web:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
+							<web:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
 							<web:acsCatairRecords>B01{{ port_of_entry }}{{ filer_code }}EI                              4N                         TQ</web:acsCatairRecords>
 							<web:acsCatairRecords>10A{{ port_of_entry }}91-10692480091-106924800                 8{{ est_entry_date }}   {{ filer_code }} {# saved_fen_comp={{ fen_comp }} #}31098  WA</web:acsCatairRecords>
-							<web:acsCatairRecords>20                           {{ port_of_entry }}{{ import_date }}{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}                 {{ est_arrival_date }}X187</web:acsCatairRecords>
-							<web:acsCatairRecords>30                  231073953303001111              1{{ prelim_stmt_date }}             AA</web:acsCatairRecords>
+							<web:acsCatairRecords>20                                     {# saved_legacy_file_no_short={{ legacy_file_no_short }} #}                       X187</web:acsCatairRecords>
+							<web:acsCatairRecords>30                  231073953303001111              1                   AA</web:acsCatairRecords>
 							<web:acsCatairRecords>40001MX00000080000000008000                    0000016625               INV001</web:acsCatairRecords>
 							<web:acsCatairRecords>50 2524900060          000000008000T                                MX{{ export_date }}N</web:acsCatairRecords>
 							<web:acsCatairRecords>60                                        MXALTSACHI</web:acsCatairRecords>
@@ -78,7 +78,7 @@
 							<web:acsCatairRecords>8949900000002771</web:acsCatairRecords>
 							<web:acsCatairRecords>90                        00000000000000000000000000000277100000008000</web:acsCatairRecords>
 							<web:acsCatairRecords>Y  {{ port_of_entry }}{{ filer_code }}EI00009                                                    TQ</web:acsCatairRecords>
-							<web:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
+							<web:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
 							<web:aceAdditionalDataRecords>HDR2310739535-5</web:aceAdditionalDataRecords>
 							<web:aceAdditionalDataRecords>ACM      8 XX 00TQ                                                                                                                                             WA            Dragon Graphix *Automation Client*</web:aceAdditionalDataRecords>
 							<web:aceAdditionalDataRecords>AM21234 Magister Road                 A4                                 Kent                               WA98075       00000000 00000027710000002771             NNYYN219248597 00000120PCS  00080000KMXALTSACHI     09172015ABI</web:aceAdditionalDataRecords>
