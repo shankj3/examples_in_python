@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as etree
 import collections as c
-doc = 'Sample_CustomsWebServiceBranch_XXX-XXX-XXXX.xml'
+doc = 'CustomsWebServiceBranch_015-013-0007.xml'
 parser = etree.XMLParser(encoding='utf-8')
 testCase = etree.parse(doc, parser)
 root = testCase.getroot()
@@ -53,7 +53,7 @@ ace_additional = {
 aerecs = {
     'SE10':{
     '3':['{{ filer_code }}',(slice(5,8))],
-    '2':['{{ saved_fen_comp }}',(slice(10,18))]
+    '2':['{{ saved_fen_comp }}',(slice(10,18))],
     '1':['{{ port_of_entry }}',(slice(49,54))]
     },
     '10':{
@@ -75,8 +75,14 @@ aerecs = {
     '40':{
     '1':['{{ export_date }}',(slice(12,18))]
     }
-
-
+}
+pgareports = {
+    'initialsDate':'({{ report_date }})', #this one needs a slice of the original string. put it in there. 
+    'branchName':'Expeditors {{ branch_code }}',
+    'branchAddress':'{{ branch_address }}',
+    'entryNo':'{{ filer_code }}-{{ saved_fen_uncomp }}',
+    'anticipatedEP':'{{ port_of_entry }}'
+}
 
 def stuff(dictionary,key,list_of_line,line):
     for i in range(1,len(dictionary[key])+1):
@@ -106,18 +112,19 @@ def register_ns(namespace):
         etree.register_namespace(prefix,uri)
 
 class ReplaceLines(object):
-    def __init__(self, testCase,acs_line_values, aceadditional_lines=None, aerecs_lines=None): #just none for right now 
+    def __init__(self, testCase,acs_line_values,pga = None,aerecs_lines=None,aceadditional_lines=None): #just none for right now 
         self.testCase = testCase
         self.acs_line_values = acs_line_values
         self.aceadditional_lines = aceadditional_lines
         self.aerecs_lines = aerecs_lines
-
+        self.pga = pga
+    root = testCase.getroot()
     namespace = {
-        "wrap": "urn:com:expd:customs:us:servicewrappers",
+        "wrap": "urn:com:expd:customs:us_entry:servicewrappers",
         "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
         "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
         "env":"http://schemas.xmlsoap.org/soap/envelope/", 
-        "web":"urn:com:expd:customs:us:webservices",
+        "web":"urn:com:expd:customs:us_entry:webservices",
         "resp":"urn:expd.com:arch:core:response",
         "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
         }
@@ -126,7 +133,6 @@ class ReplaceLines(object):
 
     def try_replaceACS(self):
         parsed_acs = []
-        root = self.testCase.getroot()
         acs_catair_lines = root.findall('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespaces = self.namespace)
         if len(acs_catair_lines) == 0:
             print("etree didn't find any values. check paths/see if there are any variables in them.")
@@ -138,23 +144,31 @@ class ReplaceLines(object):
             for i, k in zip(acs_catair_lines, parsed_acs):
                 i.text = k
         return i.text
-
+# these two between are waay too similar, need to fix that. 
     def try_replaceAErecs(self):
-        root = self.testCase.getroot()
+        parsed_ae = []
         aerecs = root.findall('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', namespaces = self.namespace)
         if len(aerecs) == 0:
             print("etree didn't find any values. check paths/see if there are any variables in them.")
         for ae in aerecs:
-            print(ae.text)
+            parsed_ae.append(line_replacement_by_section(line,self.aerecs_lines))
+        for i,k in zip(aerecs,parsed_ae):
+            i.text = k
+        return i.text
 
-    def replace_in_PGA_reports(self):
-        root = self.testcase.getroot()
-        base_xpath = './testResponse/testResponseHttpBody/env:Envelope/wrap:load7501FromCatairResponse/wrap:out/web:actionValues/web:values/'
-        initialsDate = root.find('%saphis:Lacey_Form/aphis:initialsDate' %base_xpath,namespaces = self.namespaces)
-        
+    def replace_PGA_reports(self):
+        for keys, values in self.pga.items():
+            replace_me = root.find('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:actionValues/web:values/aphis:Lacey_Form/aphis:%s'%(keys), namespaces = self.namespace)
+            replace_me.text = values
+        return replace_me.text
+
     def rewrite_TestCase(self):
-        self.testCase.write('TEST_ME.xml')
+        self.testCase.write('TEST_ME_aphis.xml')
 
-test = ReplaceLines(testCase,acscatair)
-#test.try_replaceACS()
-#test.rewrite_TestCase()
+
+
+
+test = ReplaceLines(testCase,acscatair,pgareports)
+test.replace_PGA_reports()
+#test.try_replaceAErecs()
+test.rewrite_TestCase()
