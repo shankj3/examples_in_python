@@ -14,7 +14,7 @@ def varmap_stuff(varmap):
     return lists
 
 def varmap_split(varmap_line):
-    if '=' in str(varmap_line):
+    if '=' in str(varmap_leine):
         variable, value = varmap_line.split('=', maxsplit = 1)
         return variable, value
     else:
@@ -27,15 +27,16 @@ def varmap_set_dictionary(varmap):
         varmap_dict.update({one:two})
     return varmap_dict 
 
-pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(varmap_set_dictionary('CustomsWebServiceBranch'))
+#pp = pprint.PrettyPrinter(indent=4)
+#pp.pprint(varmap_set_dictionary('CustomsWebServiceBranch'))
 
 #^^^ this as it is overwrites values because they have the same key ^^^
 
 class ReplaceSections(object):
-    def __init__(self, testCase,namespace): 
+    def __init__(self, testCase,namespace,mapper): 
         self.testCase = testCase
         self.namespace = namespace
+        self.mapper = mapper 
     #issue: sometimes the namespaces are different (like :us: is :us_entry:), need to account for that.. some kind of try or something. 
 
     def register_ns(self):
@@ -47,33 +48,41 @@ class ReplaceSections(object):
         return root
 
     def string_replacement(self,dictionary,key,list_of_line,line):
-        for i in range(1,len(dictionary[key])+1):
-            if line.text[dictionary[key]['%s' %i][1]] == (' '*(len(line.text[dictionary[key]['%s' %i][1]]))):
+        for replacee, slice_section in dictionary[key].items():
+            if line.text[slice_section[0]:slice_section[1]] == (' '*(len(line.text[slice_section[0]:slice_section[1]]))):
                 #with open('%s_unusedDictKeys.txt' %type(self.testCase).__name__,'a') as output:
                 #    output.write(dictionary[key]['%s' %i][0] + ' ')
                 #    output.write(key+' ')
                 #    output.write(str(dictionary[key]['%s' %i][1]))
                 #    output.write('\n')
-                print(line.text[:3],dictionary[key]['%s' %i][0],str(dictionary[key]['%s' %i][1]))
+                print(line.text[:3],replacee,slice_section)
             else:
-                list_of_line[dictionary[key]['%s' %i][1]] = dictionary[key]['%s' %i][0]
+                list_of_line[slice_section[0]:slice_section[1]] = str(replacee) 
         variabalized_string = ''.join(list_of_line)
+        #print(variabalized_string)
         return variabalized_string
 
-    def line_replacement_by_dictionary(self,line,dictionary):#iterates through dictionary on a specific line 
+    def find_special_lines(self,entry):
+        if entry[0] in ['A','Z']:
+            identifier = 'AZ'
+        elif entry[0] in ['B','Y']:
+            identifier = 'BY'
+        elif entry[:3] in ['TRL','HDR']:
+            identifier = 'TRLHDR'
+        else:
+            identifier = str(entry[:2])
+        print(identifier)
+        return identifier
+
+
+    def line_replacement_by_dictionary(self, line, dictionary):        
         listed_line = list(line.text)
-        for key, values in dictionary.items():
-            if key == 'AZ' and (line.text.startswith('A') or line.text.startswith('Z')): 
-                string = self.string_replacement(dictionary,key,listed_line,line)
-            elif key == 'BY' and (line.text.startswith('B') or line.text.startswith('Y')):
-                string = self.string_replacement(dictionary,key,listed_line,line)
-            elif key == 'TRLHDR' and(line.text.startswith('TRL') or line.text.startswith('HDR')):
-                string = self.string_replacement(dictionary,key,listed_line,line)
-            elif line.text.startswith(str(key)):
-                string = self.string_replacement(dictionary,key,listed_line,line)
-            else:
-                string = ''.join(listed_line)
-        return string
+        identifier = self.find_special_lines(line.text)
+        if dictionary.get(identifier):
+            new_line = self.string_replacement(dictionary, identifier, listed_line, line)
+        else:
+            new_line = line.text
+        return new_line
 
     def replace_chunks_in_XML(self,needed_xpath,dictionary):
         replaced_section = []
@@ -106,15 +115,16 @@ class ReplaceSections(object):
         self.testCase.write(output)
 
 class ReplaceItAll(ReplaceSections):
-    def __init__(self, testCase,namespace):
+    def __init__(self, testCase,namespace,mapper):
         self.testCase = testCase
         self.namespace = namespace
+        self.mapper = mapper 
 
-    def ReplaceEverything(self):
-        self.replace_chunks_in_XML('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData',cust_map.aerecs)
-        self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:aceAdditionalDataRecords',cust_map.ace_additional)
-        self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords',cust_map.acscatair)
-        self.replace_xml_tag_text('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:values/aphis:Lacey_Form/aphis:',cust_map.pgareports)
-        self.replace_xml_tag_text('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:',cust_map.request_body)
-        self.replace_requestHeader(cust_map.request_header)
+    def ReplaceEverything(self,mapper):
+        self.replace_chunks_in_XML('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', mapper['aerecs'])
+        self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:aceAdditionalDataRecords', mapper['ace_additional'])
+        self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', mapper['acscatair'])
+        self.replace_xml_tag_text('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:values/aphis:Lacey_Form/aphis:', mapper['pgareports'])
+        self.replace_xml_tag_text('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:', mapper['request_body'])
+        self.replace_requestHeader(mapper['request_header'])
 
