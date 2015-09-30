@@ -1,0 +1,216 @@
+<testCase id="015-013-0005" version="1.0"
+ xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:sec="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+ xmlns:web="urn:com:expd:customs:us:webservices"
+ xmlns:wrap="urn:com:expd:customs:us:servicewrappers">
+    <testMetadata>
+        <testCreateName>Jessi Shank</testCreateName>
+        <testCreateDate>20150821</testCreateDate>
+        <testDescription>Checking repeating OI 2x like test 2, then add extra pg04 lines to OI #1 and a PG14 to OI #2. also add in test element genus and species information to ensure that it accurately shows up on the report</testDescription>
+    </testMetadata>
+    <testVariables>
+        <testMaxTime>0</testMaxTime>
+        <testDelay>0</testDelay>
+        <testExecuteSqlQuery>false</testExecuteSqlQuery>
+        <testSqlColumnsToIgnore />
+        <testSqlConnectionUrl />
+        <testSqlUsername />
+        <testSqlPassword />
+        <testSqlQueries />
+    </testVariables>
+    <testRequest>
+        <testRequestHttpHeader>
+            <REQUEST-LINE>POST {{ usentry_endpoint }} HTTP/1.1</REQUEST-LINE>
+            <ACCEPT-ENCODING>gzip,deflate</ACCEPT-ENCODING>
+            <CONTENT-TYPE>text/xml;charset=UTF-8</CONTENT-TYPE>
+            <SOAPACTION>urn:com:expd:customs:us:servicewrappers/load7501FromCatair</SOAPACTION>
+            <CONTENT-LENGTH>4864</CONTENT-LENGTH>
+            <HOST>{{ usentry_host }}:{{ usentry_port }}</HOST>
+            <CONNECTION>Keep-Alive</CONNECTION>
+            <USER-AGENT>Apache-HttpClient/4.1.1 (java 1.5)</USER-AGENT>
+        </testRequestHttpHeader>
+        <testRequestHttpBody>
+            <env:Envelope id="015-013-0005">
+                <env:Header>
+                    <sec:Security>
+                        <sec:UsernameToken web:Id="UsernameToken-1">
+                            <sec:Username>{{ usentry_sp_user }}</sec:Username>
+                            <sec:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{ usentry_sp_pw }}</sec:Password>
+                        </sec:UsernameToken>
+                    </sec:Security>
+                </env:Header>
+                <env:Body>
+                    <wrap:load7501FromCatair>
+                        <wrap:in>
+                            <web:actionValues>
+                                <web:key>pgr</web:key>
+                                <web:values>
+                                    <web:key>sendRequest</web:key>
+                                    <web:value>true</web:value>
+                                </web:values>
+                                <web:values>
+                                    <web:key>returnRequest</web:key>
+                                    <web:value>true</web:value>
+                                </web:values>
+                            </web:actionValues>
+                            <web:branchCode>{{ branch_code }}</web:branchCode>
+                            <web:sendToCustoms>false</web:sendToCustoms>
+                            <web:sendSimplifiedEntry>false</web:sendSimplifiedEntry>
+                            <web:sendCensusOverrides>false</web:sendCensusOverrides>
+                            <web:returnAeRecs>true</web:returnAeRecs>
+                            <web:dutyCalculation>C</web:dutyCalculation>
+                            <web:feeCalculation>C</web:feeCalculation>
+                            <web:formalEntryNo>{# saved_fen_uncomp={{ fen_uncomp }} #}</web:formalEntryNo>
+                            <web:legacyFileNo>{# saved_legacy_file_no={{ legacy_file_no }} #}</web:legacyFileNo>
+                            <web:filerCode>{{ filer_code }}</web:filerCode>
+                            <web:acsCatairRecordCount>37</web:acsCatairRecordCount>
+                            <web:aceAdditionalDataRecordCount>27</web:aceAdditionalDataRecordCount>
+                            <web:acsCatairRecords>++PRIORITY SIS</web:acsCatairRecords>
+                            <web:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
+                            <web:acsCatairRecords>B01{{ port_of_entry }}{{ filer_code }}EI                              4N                         TQ</web:acsCatairRecords>
+                            <web:acsCatairRecords>10A{{ port_of_entry }}91-10692480091-106924800                 8{{ est_entry_date }}   {{ filer_code }} {# saved_fen_comp={{ fen_comp }} #}31098  WA</web:acsCatairRecords>
+                            <web:acsCatairRecords>20                                     {# saved_legacy_file_no_short={{ legacy_file_no_short }} #}                       X187</web:acsCatairRecords>
+                            <web:acsCatairRecords>30                  231073953303001111              1                   AA</web:acsCatairRecords>
+                            <web:acsCatairRecords>40001MX00000080000000008000                    0000016625               INV001</web:acsCatairRecords>
+                            <web:acsCatairRecords>50 2524900060          000000008000T                                MX{{ export_date }}N</web:acsCatairRecords>
+                            <web:acsCatairRecords>60                                        MXALTSACHI</web:acsCatairRecords>
+                            <web:acsCatairRecords>62          49900002771</web:acsCatairRecords>
+                            <web:acsCatairRecords>8949900000002771</web:acsCatairRecords>
+                            <web:acsCatairRecords>90                        00000000000000000000000000000277100000008000</web:acsCatairRecords>
+                            <web:acsCatairRecords>Y  {{ port_of_entry }}{{ filer_code }}EI00009                                                    TQ</web:acsCatairRecords>
+                            <web:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5154</web:acsCatairRecords>
+                            <web:aceAdditionalDataRecords>HDR{{ filer_code }}{{ saved_fen_uncomp }}</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACM      8 XX 00TQ                                                                                                                                             WA            Dragon Graphix *Automation Client*</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AM21234 Magister Road                 A4                                 Kent                               WA98075       00000000 00000027710000002771             NNYYN219248597 00000120PCS  00080000KMXALTSACHI     09172015ABI</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AM3                                                                          2</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOVNEN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOODSN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOFSIN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMONHTN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOPSTN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOTS1N</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOAPHY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOFDAN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOATFN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMODTCN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOTTBN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMONMFN</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMBYACE IMPORT PRERELEASE *DO NOT MODIF1238 Test BLVD                     Test Suite A56                                                        Laredo                             TX 78045          US                       91-106924800</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMSEACE IMPORT PRERELEASE *DO NOT MODIF1238 Test BLVD                     Test Suite A56                                                        Laredo                             TX 78045          US               G6050579</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMMFACE IMPORT PRERELEASE *DO NOT MODIF1238 Test BLVD                     Test Suite A56                                                        Laredo                             TX 78045          US                                   XOALCFAB65RIC</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACI001 0000100000000USD0000000050000000000000500000</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AI2                                                                      0000000000000000000000000000N</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACL00010001                                       0000000000  0000000000   0000000000000000000000000000000000000000000      7 000000000000000000000000000000000000000</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AL2</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVDXR08242015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVCSD09022015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVESF09042015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>TRL{{ filer_code }}{{ saved_fen_uncomp }}</web:aceAdditionalDataRecords>
+                        </wrap:in>
+                    </wrap:load7501FromCatair>
+                </env:Body>
+            </env:Envelope>
+        </testRequestHttpBody>
+    </testRequest>
+    <testResponse>
+        <testResponseHttpHeader>
+            <STATUS-LINE>HTTP/1.1 200 OK</STATUS-LINE>
+            <Date>Thu, 27 Feb 2014 21:26:46 GMT</Date>
+            <Server>Apache/1.3.41 (Unix) mod_jk/1.2.26</Server>
+            <Accept>text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</Accept>
+            <SOAPAction>""</SOAPAction>
+            <Content-Length>3638</Content-Length>
+            <Keep-Alive>timeout=15, max=100</Keep-Alive>
+            <Connection>Keep-Alive</Connection>
+            <Content-Type>text/xml;charset=utf-8</Content-Type>
+        </testResponseHttpHeader>
+        <testResponseHttpBody>
+            <env:Envelope>
+                <env:Header />
+                <env:Body>
+                    <wrap:load7501FromCatairResponse>
+                        <wrap:out>
+                            <hasConfirms>false</hasConfirms>
+                            <hasErrors>false</hasErrors>
+                            <hasMessages>false</hasMessages>
+                            <web:usEntryVersion>15.09.011-306888</web:usEntryVersion>
+                            <web:aeRecs>
+                                <web:id>A</web:id>
+                                <web:aeData>A{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}     SE                                {{ saved_fen_uncomp }} {{ branch_code }}5154   Y</web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>B</web:id>
+                                <web:aeData>B  {{ port_of_entry }}{{ filer_code }}SE                                                         TQ         </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE10A231  07395355 31EI 91-106924800  800000080003001 2                         </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE20CR 219248597                                                                </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE30CN                                    EI 91-106924800                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE30BY DRAGON GRAPHIX *AUTOMATION CLIENT*                                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE35151234 MAGISTER ROAD                 15A4                                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE36KENT                               WA       98075          US               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE40001MX                                                                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE50MF DRAGON GRAPHIX *AUTOMATION CLIENT*                                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE55151234 MAGISTER ROAD                 15A4                                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE56KENT                               WA       98075          US               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE50SE DRAGON GRAPHIX *AUTOMATION CLIENT*                                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE55151234 MAGISTER ROAD                 15A4                                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE56KENT                               WA       98075          US               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE602524900060                                                                  </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>Y</web:id>
+                                <web:aeData>Y  {{ port_of_entry }}{{ filer_code }}SE00014                                                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>Z</web:id>
+                                <web:aeData>Z{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}                                                            </web:aeData>
+                            </web:aeRecs>
+
+                        </wrap:out>
+                    </wrap:load7501FromCatairResponse>
+                </env:Body>
+            </env:Envelope>
+        </testResponseHttpBody>
+    </testResponse>
+</testCase>

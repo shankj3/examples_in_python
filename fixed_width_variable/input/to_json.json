@@ -1,0 +1,119 @@
+{
+"acscatair": {
+        "AZ" :{
+        "{{ branch_code }}":[69,72],
+        "{{ saved_fen_uncomp }}":[59,68],
+        "{{ date_comp }}":[14,20],
+        "{{ mck_code }}":[8,14],
+        "{{ filer_code }}":[5,8],
+        "{{ cbp_port_code }}":[1,5]
+    },
+        "BY":{
+        "{{ filer_code }}":[7,10],
+        "{{ port_of_entry }}":[3,7]
+    
+    },
+        "10":{
+        "{# saved_fen_comp={{ fen_comp }} #}":[62,70], 
+        "{{ filer_code }}":[58,61],      
+        "{{ est_entry_date }}":[49,55],
+        "{{ port_of_entry }}":[3,7]        
+
+    },
+        "20":{
+        "{{ est_arrival_date }}":[65,71],
+        "{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}":[39,48],
+        "{{ import_date }}":[33,39],
+        "{{ port_of_entry }}":[29,33]
+
+    },
+        "30":{
+        "{{ prelim_stmt_date }}":[53,59]
+    },
+        "50":{
+        "{{ export_date }}":[70,76]
+    }
+        },
+
+
+"ace_additional" : {
+    "TRLHDR": {
+    "{{ saved_fen_uncomp }}":[6,15],
+    "{{ filer_code }}":[3,6]
+    } 
+},
+
+"aerecs" : {
+    "AZ" :{
+    "{{ branch_code }}":[69,72],
+    "{{ saved_fen_uncomp }}":[59,68],
+    "{{ date_comp }}":[14,20],
+    "{{ mck_code }}":[8,14],
+    "{{ filer_code }}":[5,8],
+    "{{ cbp_port_code }}":[1,5]
+    },
+    "BY":{
+    "{{ filer_code }}":[7,10],
+    "{{ port_of_entry }}":[3,7]
+    },
+    "SE10":{
+    "{{ port_of_entry }}":[49,54],
+    "{{ saved_fen_comp }}":[10,18],
+    "{{ filer_code }}":[5,8]
+
+    },
+    "10":{
+    "{{ prelim_stmt_date }}":[51,57],
+    "{{ saved_legacy_file_no_short }}":[21,30],
+    "{{ port_of_entry }}":[17,21],
+    "{{ saved_fen_comp }}":[8,16],
+    "{{ filer_code }}":[3,6]
+    },
+    "11":{
+    "{{ import_date }}":[47,53],
+    "{{ est_entry_date }}":[41,47]
+    },
+    "20":{
+    "{{ est_arrival_date }}":[10,16]
+    },
+    "40":{
+    "{{ export_date }}":[12,18]
+    }
+},
+
+"pgareports" : {
+    "initialsDate":"({{ report_date }})", 
+    "branchName":"Expeditors {{ branch_code }}",
+    "branchAddress":"{{ branch_address }}",
+    "entryNo":"{{ filer_code }}-{{ saved_fen_uncomp }}",
+    "anticipatedEP":"{{ port_of_entry }}"
+},
+
+"request_body" : {
+    "branchCode":"{{ branch_code }}",
+    "formalEntryNo":"{# saved_fen_uncomp={{ fen_uncomp }} #}",
+    "legacyFileNo":"{# saved_legacy_file_no={{ legacy_file_no }} #}",
+    "filerCode":"{{ filer_code }}"
+},
+
+"request_header" : {
+    "REQUEST-LINE":"POST {{ usentry_endpoint }} HTTP/1.1",
+    "ACCEPT-ENCODING":"gzip,deflate",
+    "CONTENT-TYPE":"text/xml;charset=UTF-8",
+    "SOAPACTION":"urn:com:expd:customs:us:servicewrappers/load7501FromCatair",
+    "HOST":"{{ usentry_host }}:{{ usentry_port }}",
+    "CONNECTION":"Keep-Alive",
+    "USER-AGENT":"Apache-HttpClient/4.1.1 (java 1.5)"
+},
+
+"namespace" : {
+    "wrap": "urn:com:expd:customs:us:servicewrappers",
+    "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
+    "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
+    "env":"http://schemas.xmlsoap.org/soap/envelope/", 
+    "web":"urn:com:expd:customs:us:webservices",
+    "resp":"urn:expd.com:arch:core:response",
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
+    }
+}
+

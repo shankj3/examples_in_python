@@ -1,0 +1,562 @@
+<testCase id="015-014-0007" version="1.0"
+ xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+ xmlns:ns2="urn:com:expd:customs:us:webservices"
+ xmlns:ns3="urn:com:expd:customs:us:servicewrappers"
+ xmlns:ns4="urn:expd.com:arch:core:response"
+ xmlns:ns6="urn:com:expd:customs:us:reports:aphis:lacey"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<testMetadata>
+		<testCreateName />
+		<testCreateDate />
+		<testDescription />
+	</testMetadata>
+	<testVariables>
+		<testMaxTime />
+		<testDelay />
+		<testExecuteSqlQuery />
+		<testSqlColumnsToIgnore />
+		<testSqlConnectionUrl />
+		<testSqlUsername />
+		<testSqlPassword />
+		<testSqlQueries />
+	</testVariables>
+	<testRequest>
+		<testRequestHttpHeader>
+			<REQUEST-LINE>POST {{ usentry_endpoint }} HTTP/1.1</REQUEST-LINE>
+			<ACCEPT-ENCODING />
+			<CONTENT-TYPE>text/xml;charset=UTF-8</CONTENT-TYPE>
+			<SOAPACTION>urn:com:expd:customs:us:servicewrappers/load7501FromCatair</SOAPACTION>
+			<CONTENT-LENGTH />
+			<HOST>{{ usentry_host }}:{{ usentry_port }}</HOST>
+			<CONNECTION />
+			<USER-AGENT>Apache-HttpClient/4.1.1 (java 1.5)</USER-AGENT>
+		</testRequestHttpHeader>
+		<testRequestHttpBody>
+			<ns0:Envelope id="015-014-0007">
+				<ns0:Header>
+					<ns1:Security>
+						<ns1:UsernameToken ns2:Id="UsernameToken-1">
+							<ns1:Username />
+							<ns1:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText" />
+						</ns1:UsernameToken>
+					</ns1:Security>
+				</ns0:Header>
+				<ns0:Body>
+					<ns3:load7501FromCatair>
+						<ns3:in>
+							<ns2:actionValues>
+								<ns2:key />
+								<ns2:values>
+									<ns2:key />
+									<ns2:value />
+								</ns2:values>
+								<ns2:values>
+									<ns2:key />
+									<ns2:value />
+								</ns2:values>
+							</ns2:actionValues>
+							<ns2:branchCode>{{ branch_code }}</ns2:branchCode>
+							<ns2:sendToCustoms>false</ns2:sendToCustoms>
+							<ns2:sendSimplifiedEntry>true</ns2:sendSimplifiedEntry>
+							<ns2:sendCensusOverrides>false</ns2:sendCensusOverrides>
+							<ns2:returnAeRecs>true</ns2:returnAeRecs>
+							<ns2:dutyCalculation>C</ns2:dutyCalculation>
+							<ns2:feeCalculation>C</ns2:feeCalculation>
+							<ns2:formalEntryNo>{# saved_fen_uncomp={{ fen_uncomp }} #}</ns2:formalEntryNo>
+							<ns2:legacyFileNo>{# saved_legacy_file_no={{ legacy_file_no }} #}</ns2:legacyFileNo>
+							<ns2:filerCode>{{ filer_code }}</ns2:filerCode>
+							<ns2:acsCatairRecordCount>15</ns2:acsCatairRecordCount>
+							<ns2:aceAdditionalDataRecordCount>13</ns2:aceAdditionalDataRecordCount>
+							<ns2:aceAdditionalDataRecordCount>25</ns2:aceAdditionalDataRecordCount>
+							<ns2:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5152</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>B01{{ port_of_entry }}{{ filer_code }}EI                              4N                         TQ</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>10A{{ port_of_entry }}91-10692480091-106924800                 8{{ est_entry_date }}   {{ filer_code }} {# saved_fen_comp={{ fen_comp }} #}21098  WA</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>20                         403001{{ import_date }}{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}            784  {{ est_arrival_date }}X187</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>22            00111223344 613612937               00005800PCS</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>30                                  11              1{{ prelim_stmt_date }}             AA</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>40001MX00000397980000088878                    0000016625               INV001</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>50 2524900060          000000008000T                                MX{{ export_date }}N</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>60                                        MXALTSACHI</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>62          49900013786</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>8949900000013786</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>90                        00000000000000000000000000001378600000039798</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>Y  {{ port_of_entry }}{{ filer_code }}EI00010                                                    TQ</ns2:acsCatairRecords>
+							<ns2:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}{{ mck_code }}{{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5152</ns2:acsCatairRecords>
+							<ns2:aceAdditionalDataRecords>HDR2310739533-0</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ACM      8 XX 00TQ Dragon Graphix *Automation Client* 1234 Magister Road                 A4                                 Kent                               WA  98075     Dragon Graphix *Automation Client*</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AM21234 Magister Road                 A4                                 Kent                               WA98075       00000000 00000137860000013786             NNYYN219248595 00005800PCS  00888780KMXALTSACHI     09172015ABI</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AM3                                                                          2</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOVNEY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOODSY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOFSIY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMONHTY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOPSTY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOTS1Y</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOAPHY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOFDAY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOATFY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMODTCY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMOTTBY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AMONMFY</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ASMBYDragon Graphix *Automation Client* 1234 Magister Road                 A4                                                                    Kent                               WA 98075          US                       91-106924800</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ACI001 0000100000000USD0000000397980000000003979800</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AI2                                                                      0000000000000000000000000000N</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ASISEDragon Graphix *Automation Client* 1234 Magister Road                 A4                                                                    Kent                               WA 98075          US               G6040579</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ACL00010001                                       0000000000  0000000000   0000000000000000000000000000000000000000000      0 000000000000000000000000000000000000000</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AL2</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>ASLMFDragon Graphix *Automation Client* 1234 magister road                 a4                                                                    kent                               WA 98075          US</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>AEVESF09302015</ns2:aceAdditionalDataRecords>
+							<ns2:aceAdditionalDataRecords>TRL2310739533-0</ns2:aceAdditionalDataRecords>
+
+						</ns3:in>
+					</ns3:load7501FromCatair>
+				</ns0:Body>
+			</ns0:Envelope>
+		</testRequestHttpBody>
+	</testRequest>
+	<testResponse>  
+		<testResponseHttpHeader>
+			<STATUS-LINE>HTTP/1.1 200 OK</STATUS-LINE>
+			<Date>Thu, 27 Feb 2014 21:26:46 GMT</Date>
+			<Server>Apache/1.3.41 (Unix) mod_jk/1.2.26</Server>
+			<Accept>text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</Accept>
+			<SOAPAction>""</SOAPAction>
+			<Content-Length />
+			<Keep-Alive>timeout=15, max=100</Keep-Alive>
+			<Connection />
+			<Content-Type>text/xml; charset=utf-8</Content-Type>
+		</testResponseHttpHeader>
+		<testResponseHttpBody>
+			<ns0:Envelope>
+				<ns0:Header />
+				<ns0:Body>
+					<ns3:load7501FromCatairResponse>
+						<ns3:out>
+							<ns2:actionValues>
+								<ns2:key />
+								<ns2:values>
+									<ns2:key />
+								</ns2:values>
+							</ns2:actionValues>
+
+							<ns4:hasConfirms />
+							<ns4:hasErrors />
+							<ns4:hasMessages />
+							<ns4:messages>
+								<ns4:severity />
+								<ns4:text />
+								<ns4:category />
+								<ns4:number />
+								<ns4:fieldNames />
+							</ns4:messages>
+							<ns4:messages>
+								<ns4:severity />
+								<ns4:text />
+								<ns4:category />
+								<ns4:number />
+								<ns4:fieldNames />
+							</ns4:messages>
+							<usEntryVersion />
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:aeRecs>
+								<ns2:id />
+								<ns2:aeData />
+							</ns2:aeRecs>
+							<ns2:actionValues>
+								<ns2:values>
+									<ns2:xml xsi:type="ns8:LaceyForm">
+
+										<ns6:initialsDate>JS ({{ report_date }})</ns6:initialsDate>
+										<ns6:title />
+										<ns6:branchName />
+										<ns6:branchAddress />
+										<ns6:importerLabel />
+										<ns6:importer />
+										<ns6:entryNoLabel />
+										<ns6:entryNo>{{ filer_code }}-{{ saved_fen_uncomp }}</ns6:entryNo>
+										<ns6:importerNoLabel />
+										<ns6:importerNo />
+										<ns6:anticipatedEPLabel />
+										<ns6:anticipatedEP />
+										<ns6:invoiceLines>
+											<ns6:invoiceLabel />
+											<ns6:invoice />
+											<ns6:lineLabel />
+											<ns6:line />
+											<ns6:commercialDescLabel />
+											<ns6:commercialDesc />
+											<ns6:commodityDescLabel />
+											<ns6:commodityDesc />
+											<ns6:individualLabel />
+											<ns6:individual />
+											<ns6:individualDetails>TEST@EMAIL.COM{{cr_lf }}1237891111</ns6:individualDetails>
+											<ns6:elementLabel />
+											<ns6:quantityLabel />
+											<ns6:uomLabel />
+											<ns6:recycledLabel />
+											<ns6:genusLabel />
+											<ns6:countryLabel />
+											<ns6:elements>
+												<ns6:element />
+												<ns6:quantity />
+												<ns6:uom />
+												<ns6:recycled />
+												<ns6:genus />
+												<ns6:country />
+											</ns6:elements>
+											<ns6:lineValue />
+											<ns6:dateOfSignature />
+										</ns6:invoiceLines>
+										<ns6:glossaryTitle />
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>
+										<ns6:glossarySections>
+											<definitionTitle />
+											<definition />
+										</ns6:glossarySections>	
+									</ns2:xml>
+								</ns2:values>
+							</ns2:actionValues>
+						</ns3:out>
+					</ns3:load7501FromCatairResponse>
+				</ns0:Body></ns0:Envelope>
+			</testResponseHttpBody>
+		</testResponse>
+	</testCase>

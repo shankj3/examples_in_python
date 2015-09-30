@@ -1,0 +1,267 @@
+<testCase id="015-013-0005" version="1.0"
+ xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:resp="urn:expd.com:arch:core:response"
+ xmlns:sec="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+ xmlns:web="urn:com:expd:customs:us:webservices"
+ xmlns:wrap="urn:com:expd:customs:us:servicewrappers">
+    <testMetadata>
+        <testCreateName>Jessi Shank</testCreateName>
+        <testCreateDate>9/30/2015</testCreateDate>
+        <testDescription />
+    </testMetadata>
+    <testVariables>
+        <testMaxTime>0</testMaxTime>
+        <testDelay>0</testDelay>
+        <testExecuteSqlQuery>false</testExecuteSqlQuery>
+        <testSqlColumnsToIgnore />
+        <testSqlConnectionUrl />
+        <testSqlUsername />
+        <testSqlPassword />
+        <testSqlQueries />
+    </testVariables>
+    <testRequest>
+        <testRequestHttpHeader>
+            <REQUEST-LINE>POST {{ usentry_endpoint }} HTTP/1.1</REQUEST-LINE>
+            <ACCEPT-ENCODING>gzip,deflate</ACCEPT-ENCODING>
+            <CONTENT-TYPE>text/xml;charset=UTF-8</CONTENT-TYPE>
+            <SOAPACTION>urn:com:expd:customs:us:servicewrappers/load7501FromCatair</SOAPACTION>
+            <CONTENT-LENGTH>4864</CONTENT-LENGTH>
+            <HOST>{{ usentry_host }}:{{ usentry_port }}</HOST>
+            <CONNECTION>Keep-Alive</CONNECTION>
+            <USER-AGENT>Apache-HttpClient/4.1.1 (java 1.5)</USER-AGENT>
+        </testRequestHttpHeader>
+        <testRequestHttpBody>
+            <env:Envelope id="015-013-0005">
+                <env:Header>
+                    <sec:Security>
+                        <sec:UsernameToken web:Id="UsernameToken-1">
+                            <sec:Username>{{ usentry_sp_user }}</sec:Username>
+                            <sec:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{ usentry_sp_pw }}</sec:Password>
+                        </sec:UsernameToken>
+                    </sec:Security>
+                </env:Header>
+                <env:Body>
+                    <wrap:load7501FromCatair>
+                        <wrap:in>
+                            <web:formalEntryNo>{# saved_fen_uncomp={{ fen_uncomp }} #}</web:formalEntryNo>
+                            <web:filerCode>{{ filer_code }}</web:filerCode>
+                            <web:acsCatairRecordCount>15</web:acsCatairRecordCount>
+                            <web:aceAdditionalDataRecords>HDR{{ filer_code }}{{ saved_fen_uncomp }}</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACM      8 XX 01TQ                                                                                                                                             WA            Dragon Graphix *Automation Client*</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AM21234 Magister Road                 A4                                 Kent                               WA98075       09302015 00000034640000003464             NNYYN219248598 00000300CTNS 00003000KXOALCFAB65RIC  09302015ABI</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AM3                                                                          2        A</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOVNEY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOODSY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOFSIY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMONHTY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOPSTY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOTS1Y</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOAPHY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOFDAY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOATFY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMODTCY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMOTTBY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AMONMFY</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMBYDragon Graphix *Automation Client* 1234 Magister Road                 A4                                                                    Kent                               WA 98075          US                       91-106924800</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMSEQA Generated                       456 Test Rd                                                                                              Manatoba                                             CA</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ASMMFQA Testing                         123 Test Dr                                                                                              Saskatoon                                            CA                                   XOALCFAB65RIC</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACI001 0000100000000USD0000000100000000000001000000</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AI2                                                                      0000000000000000000000000000N</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>ACL00010001                                       0000000000  0000000000   0000000000000000000000000000000000000000000      0 000000000000000000000000000000000000000</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AL2</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVDXR09302015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVCSD10092015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>AEVESF10132015</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecords>TRL{{ filer_code }}{{ saved_fen_uncomp }}</web:aceAdditionalDataRecords>
+                            <web:aceAdditionalDataRecordCount>27</web:aceAdditionalDataRecordCount>
+                            <web:acsCatairRecords>++PRIORITY CAR</web:acsCatairRecords>
+                            <web:acsCatairRecords>A{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5156</web:acsCatairRecords>
+                            <web:acsCatairRecords>B01{{ port_of_entry }}{{ filer_code }}EI                              4N                         TQ</web:acsCatairRecords>
+                            <web:acsCatairRecords>10A{{ port_of_entry }}91-10692480091-106924800                 8{{ est_entry_date }}   {{ filer_code }} {# saved_fen_comp={{ fen_comp }} #}21098  WA</web:acsCatairRecords>
+                            <web:acsCatairRecords>20                         40{{ port_of_entry }}{{ import_date }}{# saved_legacy_file_no_short={{ legacy_file_no_short }} #}4N          6934 {{ est_arrival_date }}X187</web:acsCatairRecords>
+                            <web:acsCatairRecords>22            09909302015                         00000300CTNS</web:acsCatairRecords>
+                            <web:acsCatairRecords>30                                  10              2{{ prelim_stmt_date }}             AA</web:acsCatairRecords>
+                            <web:acsCatairRecords>40001XO00000100000000000300                    0000000001               INV001</web:acsCatairRecords>
+                            <web:acsCatairRecords>50 4901990070          000000200000NO                               CA{{ export_date }}N</web:acsCatairRecords>
+                            <web:acsCatairRecords>60                                        XOALCFAB65RIC</web:acsCatairRecords>
+                            <web:acsCatairRecords>62          49900003464</web:acsCatairRecords>
+                            <web:acsCatairRecords>8949900000003464</web:acsCatairRecords>
+                            <web:acsCatairRecords>90                        00000000000000000000000000000346400000010000</web:acsCatairRecords>
+                            <web:acsCatairRecords>Y  {{ port_of_entry }}{{ filer_code }}EI00010                                                    TQ</web:acsCatairRecords>
+                            <web:acsCatairRecords>Z{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}01                                     {{ saved_fen_uncomp }} {{ branch_code }}5156</web:acsCatairRecords>
+                            <web:branchCode>{{ branch_code }}</web:branchCode>
+                            <web:sendToCustoms>false</web:sendToCustoms>
+                            <web:sendSimplifiedEntry>false</web:sendSimplifiedEntry>
+                            <web:sendCensusOverrides>false</web:sendCensusOverrides>
+                            <web:returnAeRecs>true</web:returnAeRecs>
+                            <web:dutyCalculation>C</web:dutyCalculation>
+                            <web:feeCalculation>C</web:feeCalculation>
+                        </wrap:in>
+                    </wrap:load7501FromCatair>
+                </env:Body>
+            </env:Envelope>
+        </testRequestHttpBody>
+    </testRequest>
+    <testResponse>
+        <testResponseHttpHeader>
+            <STATUS-LINE>HTTP/1.1 200 OK</STATUS-LINE>
+            <Date>Thu, 27 Feb 2014 21:26:46 GMT</Date>
+            <Server>Apache/1.3.41 (Unix) mod_jk/1.2.26</Server>
+            <Accept>text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</Accept>
+            <SOAPAction>""</SOAPAction>
+            <Content-Length>3638</Content-Length>
+            <Keep-Alive>timeout=15, max=100</Keep-Alive>
+            <Connection>Keep-Alive</Connection>
+            <Content-Type>text/xml;charset=utf-8</Content-Type>
+        </testResponseHttpHeader>
+        <testResponseHttpBody>
+            <env:Envelope>
+                <env:Header />
+                <env:Body>
+                    <wrap:load7501FromCatairResponse>
+                        <wrap:out>
+                            <resp:hasConfirms>false</resp:hasConfirms>
+                            <resp:hasErrors>false</resp:hasErrors>
+                            <resp:hasMessages>true</resp:hasMessages>
+                            <resp:messages>
+                                <resp:severity>INFO</resp:severity>
+                                <resp:text>US Entry Duty matches CFIT Duty.</resp:text>
+                                <resp:category>GL05001</resp:category>
+                                <resp:number>5001</resp:number>
+                                <resp:fieldNames>dutyCalculation</resp:fieldNames>
+                            </resp:messages>
+                            <resp:messages>
+                                <resp:severity>WARNING</resp:severity>
+                                <resp:text>US Entry Fees did not match CFIT Fees.</resp:text>
+                                <resp:category>GL05001</resp:category>
+                                <resp:number>5001</resp:number>
+                                <resp:fieldNames>feeCalculation</resp:fieldNames>
+                            </resp:messages>
+                            <web:usEntryVersion>15.10.01-311008</web:usEntryVersion>
+                            <web:aeRecs>
+                                <web:id>A</web:id>
+                                <web:aeData>A{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}     AE                                {{ saved_fen_uncomp }} {{ branch_code }}5156   Y</web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>B</web:id>
+                                <web:aeData>B  {{ port_of_entry }}{{ filer_code }}AE                                                         TQ         </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>10</web:id>
+                                <web:aeData>10A{{ filer_code }}  {{ saved_fen_comp }} {{ port_of_entry }}{{ saved_legacy_file_no_short }}   2140 XA          2{{ prelim_stmt_date }}  4N                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>11</web:id>
+                                <web:aeData>1191-10692480091-106924800               {{ est_entry_date }}{{ import_date }}       WA                  </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>20</web:id>
+                                <web:aeData>20AA  3001{{ est_arrival_date }}X187                                                            </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>21</web:id>
+                                <web:aeData>216934                                                                          </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>22</web:id>
+                                <web:aeData>2200000300CTNS                                                                  </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>23</web:id>
+                                <web:aeData>23M    09909302015                                                              </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>31</web:id>
+                                <web:aeData>318B 098                                                                        </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE11       X187                        6934                                     </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE20SSR2                                                                        </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE30BY DRAGON GRAPHIX *AUTOMATION CLIENT*                                       </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE35151234 MAGISTER ROAD                 15A4                                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE36KENT                               WA       98075          US               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE30SE QA GENERATED                                                             </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE3515456 TEST RD                                                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE36MANATOBA                                                   CA               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE30MF QA TESTING                                                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE3515123 TEST DR                                                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>SE</web:id>
+                                <web:aeData>SE36SASKATOON                                                  CA               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>40</web:id>
+                                <web:aeData>40  001 XOCA{{ export_date }}        0000000001     0000000300    N                        </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>47</web:id>
+                                <web:aeData>47MXOALCFAB65RIC                                                                </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>47</web:id>
+                                <web:aeData>47C91-106924800                                                                 </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>47</web:id>
+                                <web:aeData>47S91-106924800                                                                 </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>50</web:id>
+                                <web:aeData>504901990070 0000000000 0000010000 000000200000NO                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>62</web:id>
+                                <web:aeData>6249900003464                                                                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>89</web:id>
+                                <web:aeData>8949900000003464                                                                </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>90</web:id>
+                                <web:aeData>9000000000000 00000003464 00000000000 00000000000 00000000000                   </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>Y</web:id>
+                                <web:aeData>Y  {{ port_of_entry }}{{ filer_code }}AE00026                                                               </web:aeData>
+                            </web:aeRecs>
+                            <web:aeRecs>
+                                <web:id>Z</web:id>
+                                <web:aeData>Z{{ cbp_port_code }}{{ filer_code }}      {{ date_comp }}                                                            </web:aeData>
+                            </web:aeRecs>
+                        </wrap:out>
+                    </wrap:load7501FromCatairResponse>
+                </env:Body>
+            </env:Envelope>
+        </testResponseHttpBody>
+    </testResponse>
+</testCase>
