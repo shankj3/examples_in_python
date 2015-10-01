@@ -1,0 +1,37 @@
+{
+    "task_config":{
+        "description": "jessi",
+        "max_runtime": 3600,
+        "priority": 50,
+        "repeats": false,
+        "client_multiplier": 1
+    },
+    "client_configs": {
+        "single_user_1": {
+            "service_threads": 1
+        }
+    },
+    "environments":{
+        "CustomsWebServiceBranch": "QA_015"
+    },
+    "groups":{
+        "group_1":{
+            "dependencies": [],
+            "cases":[
+                "CustomsWebServiceBranch_001-001-1112"
+    ],
+            "case_multiplier": 1
+        }
+    },
+    "test_clients": [
+        {
+            "client_config": "single_user_1",
+            "groups": [
+                "group_1"
+            ],
+            "continuous": false
+        }
+    ]
+}
+
+

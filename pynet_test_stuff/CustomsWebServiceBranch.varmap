@@ -1,0 +1,542 @@
+[common]
+usentry_version=15.08.03-302222
+date={% d0?dtformat=%Y-%m-%d %}
+date_other={% d0?dtformat=%d/%m/%Y %}
+date_comp={% d0?dtformat=%m%d%y %}
+date_comp_year={% d0?dtformat=%m%d%Y %}
+date_comp_minus_3={% ds3?dtformat=%m%d%y %}
+email_address=cheri.connell@expeditors.com
+est_arrival_date={% d3?dtformat=%m%d%y %}
+est_arrival_date_change={% d5?dtformat=%m%d%y %}
+est_arrival_date_db={% d3?dtformat=%Y-%m-%d %}
+est_entry_date={% d2?dtformat=%m%d%y %}
+est_entry_date_change={% d3?dtformat=%m%d%y %}
+est_entry_date_db={% d2?dtformat=%Y-%m-%d %}
+export_date={% ds1?dtformat=%m%d%y %}
+export_date_db={% ds1?dtformat=%Y-%m-%d %}
+import_date={% d1?dtformat=%m%d%y %}
+import_date_change={% d4?dtformat=%m%d%y %}
+import_date_db={% d1?dtformat=%Y-%m-%d %}
+in_bond_transit_date_change={% d0?dtformat=%m%d%y %}
+periodic_stmt_month={% m1?dtformat=%m %}
+prelim_stmt_date={% d7?dtformat=%m%d%y %}
+prelim_stmt_date_change={% d10?dtformat=%m%d%y %}
+prelim_stmt_date_db={% d7?dtformat=%Y-%m-%d %}
+test_7501_version=1
+textile_export_date={% ds2?dtformat=%m%d%y %}
+report_date={% d0?dtformat=%m-%d-%Y %}
+
+report_estimated_arrival_date={% d3?dtformat=%m-%d-%Y %}
+vne_report_date={% d0?dtformat=%b %d, %Y %}
+fda_est_arrival_date={% d3?dtformat=%m%d%Y %}
+
+fen_uncomp={@ fen @}
+fen_comp={@ fencomp @}
+filer_code=231
+usentry_ns=us
+bad_date=Aug 21, 2015
+branch_contact=Cheri Connell
+us_branch_name=Expeditors International of Washington, Inc.
+us_branch_address_1=1015 Third Ave
+us_branch_address_2=1200 Bldg-10th Floor
+us_branch_address_3=Seattle, WA 98104
+us_branch_address_4=USA
+us_branch_phone=2065551212
+branch_address={{ branch_code }} {{ us_branch_address_1 }} {{ us_branch_address_2 }} {{ us_branch_address_3 }} {{ us_branch_address_4 }}
+
+legacy_file_no={@ legacyFileNo @}
+legacy_file_no_change={@ legacyFileNoChange @}
+legacy_file_no_short={@ legacyFileNoShort @}
+legacy_file_no_short_change={@ legacyFileNoShortChange @}
+usentry_endpoint=http://{{ usentry_host }}:{{ usentry_port }}{{ usentry_path }}
+dpapp_endpoint=http://{{ dpapp_host }}:{{ dpapp_port }}{{ dpapp_path }}
+modified_last_routing_number={$ str(({{ last_routing_number }} + 1)).zfill(4) $}
+xpath_to_ignore=.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usEntryVersion
+		.//{urn:com:expd:customs:us:servicewrappers}out/{urn:com:expd:customs:us:webservices}usEntryVersion
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCustomsCountryFlagss/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}hsMpfExceptions/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCensusWarningCodeCombos/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCensusWarningOverrideCodes/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCustomsHsSetRules/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCensusWarningCodes/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}dutyReductionProgramCountrys/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}dutyReductionPrograms/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCustomsTariffCountrys/{urn:com:expd:customs:refcust:domain}id
+		.//{urn:com:expd:customs:us_entry:servicewrappers}out/{urn:com:expd:customs:us_entry:webservices}usCustomsTariffEntryTypes/{urn:com:expd:customs:refcust:domain}id
+		.//testResponseHttpHeader/CONTENT-LENGTH
+		.//testResponseHttpHeader/DATE
+
+[localhost]
+usentry_host=localhost
+abi_router_home=Q
+branch_code=DTW
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8020
+dp_branch_code=DTW
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8080
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+xpath_to_ignore=.//testResponseHttpHeader
+
+[localhost2]
+usentry_host=chq-mitchell-d7
+abi_router_home=Q
+branch_code=CLT
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8020
+dp_branch_code=CLT
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8080
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+branch_address=1015 Third Ave 1200 Bldg-10th Floor Seattle, WA 98104 USA
+usEntryNs=us
+
+[QA_001]
+bol_update=8485441-5
+bol_update_comp=84854415
+usentry_host=qacombo001.dr1.ei
+abi_router_home=Q
+branch_code=DTW
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=DTW
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QA_003]
+usentry_host=qacombo003.dr1.ei
+abi_router_home=Q
+branch_code=AMS
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=AMS
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QA_005]
+usentry_host=qacombo005.dr1.ei
+abi_router_home=Q
+branch_code=SNN
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=SNN
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QA_007]
+usentry_host=qacombo007.dr1.ei
+abi_router_home=Q
+branch_code=BJS
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=BJS
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QA_011]
+usentry_host=qacombo011.dr1.ei
+abi_router_home=Q
+branch_code=AUS
+cbp_port_code=3027
+bol_update=0052538-1
+bol_update_comp=00525381
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=AUS
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+usEntryNs=us
+
+[QA_012]
+usentry_host=qacombo012.dr1.ei
+abi_router_home=Q
+branch_code=ADL
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=ADL
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QA_013]
+usentry_host=qacombo013.dr1.ei
+abi_router_home=Q
+branch_code=SGN
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=SGN
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[STG_001]
+usentry_host=stgcombo001.dr1.ei
+abi_router_home=Q
+branch_code=ATL
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=ATL
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[STGDB_001]
+usentry_host=stgdb001.dr1.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QA_015]
+usentry_host=qacombo015.dr1.ei
+abi_router_home=Q
+branch_code=CPC
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CPC
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QAAPP_011]
+usentry_host=qaapp011.chq.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QADB_010]
+usentry_host=qadb010.chq.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QADB_011]
+usentry_host=qadb011.chq.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QADB_006]
+usentry_host=qadb006.dr1.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QAAPP_013]
+usentry_host=qaapp013.chq.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QAAPP_014]
+usentry_host=qaapp014.chq.ei
+abi_router_home=Q
+branch_code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CHQ
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+[QA3]
+
+usentry_host=qa3.chq.ei
+bol_update=8485441-5
+bol_update_comp=84854415
+abi_router_home=Q
+branch_code=IAH
+cbp_port_code=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=IAH
+mck_code=MCK001
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=qaa-harmschd
+
+
+[QA4]
+usentry-host=qa4.chq.ei
+abirouterhome=Q
+branch-code=CHQ
+cbp-portcode=3027
+dpapp_host=dpapp-qa.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=QA4
+mckcode=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry-path=/customs/us/services/CustomsUSWebService
+usentry-port=8121
+usentry-sp-pw=qainternal!
+usentry-sp-user=qaa-harmschd
+
+
+[DEV_023]
+usentry_host=devcombo023.dr1.ei
+abi_router_home=D
+branch_code=CLT
+cbp_port_code=3027
+dpapp_host=devapp027.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CLT
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=app-customsdev
+
+[DEVAPP_006]
+usentry_host=devapp006.dr1.ei
+abi_router_home=D
+branch_code=CHQ
+cbp_port_code=3027
+dpapp_host=devapp027.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CLT
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=app-customsdev
+
+
+[DEV_022]
+usentry_host=devcombo022.dr1.ei
+abi_router_home=D
+branch_code=SFO
+cbp_port_code=3027
+dpapp_host=devapp027.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CLT
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=app-customsdev
+
+[DEVDB_009]
+usentry_host=devdb009.chq.ei
+abi_router_home=D
+branch_code=CHQ
+cbp_port_code=3027
+dpapp_host=devapp027.dr1.ei
+dpapp_path=/dprefsvc/v1/abi-routing-number
+dpapp_port=8121
+dp_branch_code=CLT
+mck_code=MCK022
+port_of_entry=3001
+port_of_entry_change=3029
+port_of_unlading=3001
+port_of_unlading_change=3029
+usentry_path=/customs/us/services/CustomsUSWebService
+usentry_port=8121
+usentry_sp_pw=qainternal!
+usentry_sp_user=app-customsdev
