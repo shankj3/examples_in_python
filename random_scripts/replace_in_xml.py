@@ -2,7 +2,6 @@
 #possibly a way to replace elements in a tag, say if the requirements are changed or if there are changes to data output (like from CDATA to be diffed as a string to xml for the edoc info)
 import xml.etree.ElementTree as etree
 import os
-import line_rules
 #replace this, it sucks. 
 
 #xml_doc = input('Enter XML Document (w/o extension):')
@@ -90,15 +89,31 @@ def print_test_descrips():
             tests = etree.parse(i, parser)
             root = tests.getroot()
             descrip = root.find('./testMetadata/testDescription')
+            author = root.find('./testMetadata/testCreateName')
 #            final.append(str(root.attrib)+':'+descrip.text)
-            with open('test_descriptions.txt','a') as f:
-                f.write(str(root.attrib)+':'+descrip.text)
+            with open('test_descriptions_20_Failing.txt','a') as f:
+                f.write(str(root.attrib)+':'+author.text+' '+descrip.text)
                 f.write('\n')
-
-print_test_descrips()
-doc = 'variableinsert.xml'
+def print_rando_shit(fileno):
+    parser = etree.XMLParser(encoding='utf-8')
+    tests = etree.parse('C:\\ext\dev\eclipse\CustomsWebServiceBranch\CustomsWebServiceBranch_%s.xml'% fileno, parser)
+    root = tests.getroot()
+    descrip = root.find('./testMetadata/testDescription')
+    author = root.find('./testMetadata/testCreateName')
+#     final.append(str(root.attrib)+':'+descrip.text)
+    if descrip.text:
+        with open('test_descriptions_20_Failing.txt','a') as f:
+            f.write(str(root.attrib)+' --- '+author.text+' --- '+descrip.text)
+            f.write('\n')
+    else:
+        print(author.text,fileno)
+a = ['004-036-0003','015-070-0001','015-009-0001','015-002-0001','015-001-0001','015-006-0001','015-004-0001','020-032-0001','020-035-0001','020-029-0001','020-026-0001','020-023-0001','020-020-0001','020-017-0001','020-014-0001','020-011-0001','020-008-0001','020-005-0001','020-002-0001']
+for i in a:
+    print_rando_shit(i)
+print(len(a))
+#doc = 'variableinsert.xml'
 parse1r = etree.XMLParser(encoding='utf-8')
-othercases = etree.parse(doc,parse1r)
+#othercases = etree.parse(doc,parse1r)
 
 def register():
     namespaces = {"wrap": "urn:com:expd:customs:us:servicewrappers","sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "env":"http://schemas.xmlsoap.org/soap/envelope/", "web":"urn:com:expd:customs:us:webservices","resp":"urn:expd.com:arch:core:response","aphis":"urn:com:expd:customs:us:reports:aphis:lacey"}
@@ -127,9 +142,9 @@ def change_catair(doc):
 #        catairout.append(a.text)
     return catairout
     #ex.write('variableinsert_out.xml')
-a = change_catair(doc)
-for i in a:
-    i = list(i)
+#a = change_catair(doc)
+#for i in a:
+#    i = list(i)
 
 
 def change_testid(doc, number):
@@ -170,7 +185,7 @@ def b_line(line):
         line.text = line.text[:2]+ 'asldfjk'
 
 
-import line_rules as d
+#import line_rules as d
 import re
 
 
@@ -178,4 +193,4 @@ def replace(diction, st):
     for i,y in d.A.items(): 
         
         return newstr
-a_line(a)
+

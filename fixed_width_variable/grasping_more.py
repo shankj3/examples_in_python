@@ -2,37 +2,11 @@ import xml.etree.ElementTree as etree
 import collections as c
 import sys
 import pprint
+import os
 
-
-#varmap stuff, doesn't currently work. 
-def varmap_stuff(varmap):
-    lists = []
-    with open('%s.varmap'%varmap,'r') as f:
-        for line in f:
-            lists.append(line.rstrip())
-    return lists
-
-def varmap_split(varmap_line):
-    if '=' in str(varmap_leine):
-        variable, value = varmap_line.split('=', maxsplit = 1)
-        return variable, value
-    else:
-        return None,None
-
-def varmap_set_dictionary(varmap):
-    varmap_dict = {}
-    for line in varmap_stuff(varmap):
-        one, two = varmap_split(line)
-        varmap_dict.update({one:two})
-    return varmap_dict 
-
-#pp = pprint.PrettyPrinter(indent=4)
-#pp.pprint(varmap_set_dictionary('CustomsWebServiceBranch'))
-
-#^^^ this as it is overwrites values because they have the same key ^^^
 
 class ReplaceSections(object):
-    def __init__(self, testCase,namespace,mapper): 
+    def __init__(self, testCase, namespace, mapper): 
         self.testCase = testCase
         self.namespace = namespace
         self.mapper = mapper 
@@ -46,8 +20,9 @@ class ReplaceSections(object):
         root = self.testCase.getroot()
         return root
 
-    def string_replacement(self,dictionary,key,list_of_line,line):
-        for replacee, slice_section in dictionary[key].items():
+    def string_replacement(self, dictionary, key, list_of_line, line):
+        #replace values based on map, since doing line replacement have to replace from the back hence the sorting.
+        for replacee, slice_section in sorted(dictionary[key].items(), key=lambda t: t[1][1], reverse=True):
             if line.text[slice_section[0]:slice_section[1]] == (' '*(len(line.text[slice_section[0]:slice_section[1]]))):
                 #with open('%s_unusedDictKeys.txt' %type(self.testCase).__name__,'a') as output:
                 #    output.write(dictionary[key]['%s' %i][0] + ' ')
@@ -64,7 +39,7 @@ class ReplaceSections(object):
 #have to account for lines that have the same mapping, this is the way that I have as of now. 
 #not a huge fan because feels like hard coding. 
 
-    def find_special_lines(self,entry):
+    def find_special_lines(self, entry):
         if entry[0] in ['A','Z']:
             identifier = 'AZ'
         elif entry[0] in ['B','Y']:
@@ -99,10 +74,11 @@ class ReplaceSections(object):
             for i, k in zip(original_chunk, replaced_section):
                 i.text = k
 
-    def replace_xml_tag_text(self, needed_xpath,dictionary):
+    def replace_xml_tag_text(self, needed_xpath, dictionary):
         for keys, values in dictionary.items():
             try:
-                original_tag = self.getroot().find('%s%s'%(needed_xpath, keys), namespaces = self.namespace)#my problem wtih this is xpath wont be exactly the same as ones for aerecs, etc. needs to be xpath/aphis:#key# which is weird
+                #my problem wtih this is xpath wont be exactly the same as ones for aerecs, etc. needs to be xpath/aphis:#key# which is weird
+                original_tag = self.getroot().find('%s%s'%(needed_xpath, keys), namespaces = self.namespace)
                 original_tag.text = values
             except AttributeError:
                 print('AttributeError:',sys.exc_info()[1],'\n Path is %s%s'%(needed_xpath, keys)) 
@@ -113,16 +89,16 @@ class ReplaceSections(object):
             if entry.tag in dictionary:
                 entry.text = dictionary[entry.tag]
 
-    def rewrite_TestCase(self,output):
+    def rewrite_TestCase(self, output):
         self.testCase.write(output)
 
 class ReplaceItAll(ReplaceSections):
-    def __init__(self, testCase,namespace,mapper):
+    def __init__(self, testCase, namespace, mapper):
         self.testCase = testCase
         self.namespace = namespace
         self.mapper = mapper 
 
-    def ReplaceEverything(self,mapper):
+    def ReplaceEverything(self, mapper):
         self.replace_chunks_in_XML('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', mapper['aerecs'])
         self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:aceAdditionalDataRecords', mapper['ace_additional'])
         self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', mapper['acscatair'])
