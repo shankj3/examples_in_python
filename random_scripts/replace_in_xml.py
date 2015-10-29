@@ -94,23 +94,129 @@ def print_test_descrips():
             with open('test_descriptions_20_Failing.txt','a') as f:
                 f.write(str(root.attrib)+':'+author.text+' '+descrip.text)
                 f.write('\n')
-def print_rando_shit(fileno):
+namespace= {
+    "wrap": "urn:com:expd:customs:us:servicewrappers",
+    "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
+    "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
+    "env":"http://schemas.xmlsoap.org/soap/envelope/", 
+    "web":"urn:com:expd:customs:us:webservices",
+    "resp":"urn:expd.com:arch:core:response",
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
+    }
+
+
+namespace1= {
+    "wrap": "urn:com:expd:customs:{{ usentry_ns }}:servicewrappers",
+    "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
+    "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
+    "env":"http://schemas.xmlsoap.org/soap/envelope/", 
+    "web":"urn:com:expd:customs:{{ usentry_ns }}:webservices",
+    "resp":"urn:expd.com:arch:core:response",
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
+    }
+
+namespace2= {
+    "wrap": "urn:com:expd:customs:us_entry:servicewrappers",
+    "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
+    "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
+    "env":"http://schemas.xmlsoap.org/soap/envelope/", 
+    "web":"urn:com:expd:customs:us_entry:webservices",
+    "resp":"urn:expd.com:arch:core:response",
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
+    }
+
+def print_random_shit(fileno, doc=None):
     parser = etree.XMLParser(encoding='utf-8')
-    tests = etree.parse('C:\\ext\dev\eclipse\CustomsWebServiceBranch\CustomsWebServiceBranch_%s.xml'% fileno, parser)
+    tests = etree.parse('C:\\ext\dev\eclipse\CustomsWebServiceBranch\%s'% fileno, parser)
     root = tests.getroot()
     descrip = root.find('./testMetadata/testDescription')
     author = root.find('./testMetadata/testCreateName')
-#     final.append(str(root.attrib)+':'+descrip.text)
-    if descrip.text:
-        with open('test_descriptions_20_Failing.txt','a') as f:
-            f.write(str(root.attrib)+' --- '+author.text+' --- '+descrip.text)
-            f.write('\n')
+    acsCatairRecords = root.findall('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespace)
+    alt_acsCatairRecords = root.findall('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespace1)
+    altalt_acsCatairRecords = root.findall('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', namespace2)
+#    hsnumbers = []
+    if acsCatairRecords:
+        return_hsnumbers_from_catair(acsCatairRecords,root,descrip)
+
+    elif alt_acsCatairRecords:
+        return_hsnumbers_from_catair(alt_acsCatairRecords,root,descrip)
+
+    elif altalt_acsCatairRecords:
+        return_hsnumbers_from_catair(altalt_acsCatairRecords,root,descrip)                     
     else:
-        print(author.text,fileno)
-a = ['004-036-0003','015-070-0001','015-009-0001','015-002-0001','015-001-0001','015-006-0001','015-004-0001','020-032-0001','020-035-0001','020-029-0001','020-026-0001','020-023-0001','020-020-0001','020-017-0001','020-014-0001','020-011-0001','020-008-0001','020-005-0001','020-002-0001']
-for i in a:
-    print_rando_shit(i)
-print(len(a))
+        print(root.attrib['id'])
+#                hsnumbers.append((str(i.text[3:13])))
+#    return hsnumbers
+import re
+
+def return_hsnumbers_from_catair(lines,root, descrip):
+    try:
+        if descrip.text:
+            try:
+                for i in lines:
+                    if i.text[0:2] in ['70','62','80','81']:
+                        if i.text[2:12] != '          ':
+                            with open('testdata_hsnumbers.txt', 'a') as f:
+                                f.write('%s' % str(root.attrib['id']) +',,'+i.text[2:12] + ',,' + str(re.sub(r"\n", " ", descrip.text)))
+                                f.write('\n')
+#                        hsnumbers.append((str(i.text[2:12])))
+#                        print(hsnumbers)
+                    elif i.text[0:2] == '50':
+                        if i.text[3:13] != '          ':
+                            with open('testdata_hsnumbers.txt', 'a') as f:
+                                f.write('%s' % str(root.attrib['id']) +',,'+i.text[3:13]+ ',,' + str(re.sub((r"\n"), " ", descrip.text)))
+                                f.write('\n')       
+            except UnicodeEncodeError:
+                print('bad encode', root.attrib['id'])
+        else:
+            for i in lines:
+                if i.text[0:2] in ['70','62','80','81']:
+                    if i.text[2:12] != '          ':
+                        with open('testdata_hsnumbers.txt', 'a') as f:
+                            f.write('%s' % str(root.attrib['id']) +',,'+i.text[2:12]+ ',,')
+                            f.write('\n')
+#                    hsnumbers.append((str(i.text[2:12])))
+#                    print(hsnumbers)
+                elif i.text[0:2] == '50':
+                    if i.text[3:13] != '          ':
+                        with open('testdata_hsnumbers.txt', 'a') as f:
+                            f.write('%s' % str(root.attrib['id']) +',,'+i.text[3:13]+ ',,')
+                            f.write('\n')          
+    except AttributeError:
+        print('wtf', root.attrib['id'])
+#     final.append(str(root.attrib)+':'+descrip.text)
+#    if descrip.text:
+#        if doc:
+#            with open('test_descriptions_20_Failing.txt','a') as f:
+#                f.write(str(root.attrib)+' --- '+author.text+' --- '+descrip.text)
+#                f.write('\n')
+#        else:
+#            print(str(root.attrib), author.text, descrip.text)
+#    else:
+#        print(author.text,fileno)
+
+a = ['015-0%s-0001' %i for i in range(80,85,1)]
+
+def list_xmls_in_directory(path):
+    xmls = []
+    for files in os.listdir(path):
+        if files[-3:] == 'xml':
+            xmls.append(files)
+    return xmls
+
+customspath = 'C:/ext/dev/eclipse/CustomsWebServiceBranch'
+
+for i in list_xmls_in_directory(customspath):
+    print_random_shit(i)
+
+#print(print_random_shit('CustomsWebServiceBranch_019-004-0001.xml'))
+
+#def run_printshit(input):
+#    for i in a:
+#        print_random_shit(i)
+#run_printshit(a)
+
+
 #doc = 'variableinsert.xml'
 parse1r = etree.XMLParser(encoding='utf-8')
 #othercases = etree.parse(doc,parse1r)
@@ -160,8 +266,15 @@ def change_testid(doc, number):
     testCase.write('CustomsWebServiceBranch_%s.xml'%number)
     print(next.attrib)
 #change_testid('CustomsWebServiceBranch_015-100-1001.xml','015-100-1001')
+number = ['015-0%s-0001' %i for i in range(80,87,1)]
+docs = ['CustomsWebServiceBranch_001-001-900%s.xml' %i for i in range(1,8,1)]
 
-se11 = {'filercode':[1,5]}
+def run_change_testid(D,N):
+    if len(N) == len(D):
+        for d,n in zip(D,N):
+            change_testid(d,n)
+
+#se11 = {'filercode':[1,5]}
 #print(se11['filercode'][1])
 
 
