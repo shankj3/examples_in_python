@@ -7,7 +7,7 @@ cust_map = json.load(open(os.path.join('input','to_json.json')))
 
 #also the json file should just be dumped and ordered by the line value, then reverse ordered by the slice (high -> low)
 
-doc = os.path.join('input','pga_ttb.xml')
+doc = os.path.join('input','TEST_ME.xml')
 
 
 parser = etree.XMLParser(encoding='utf-8')
