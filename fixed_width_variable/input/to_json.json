@@ -1,12 +1,12 @@
 {
 "acscatair": {
         "AZ" :{
+        "{{ cbp_port_code }}":[1,5],
         "{{ branch_code }}":[69,72],
         "{{ saved_fen_uncomp }}":[59,68],
         "{{ date_comp }}":[14,20],
         "{{ mck_code }}":[8,14],
-        "{{ filer_code }}":[5,8],
-        "{{ cbp_port_code }}":[1,5]
+        "{{ filer_code }}":[5,8]
     },
         "BY":{
         "{{ filer_code }}":[7,10],
@@ -39,7 +39,9 @@
 "ace_additional" : {
     "TRLHDR": {
     "{{ saved_fen_uncomp }}":[6,15],
-    "{{ filer_code }}":[3,6]
+    "{{ filer_code }}":[3,6],
+    "{{ date_comp_year }}":[216,224],
+    "{{ legacy_file_no }}":[169,179]
     } 
 },
 
@@ -113,7 +115,28 @@
     "env":"http://schemas.xmlsoap.org/soap/envelope/", 
     "web":"urn:com:expd:customs:us:webservices",
     "resp":"urn:expd.com:arch:core:response",
-    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey"
-    }
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey",
+    "seform":"urn:com:expd:customs:us:reports:se",
+    "domain":"urn:com:expd:customs:us:domain"
+
+    },
+
+"namespace_usentry" : {
+    "wrap": "urn:com:expd:customs:us_entry:servicewrappers",
+    "sec":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", 
+    "util":"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", 
+    "env":"http://schemas.xmlsoap.org/soap/envelope/", 
+    "web":"urn:com:expd:customs:us_entry:webservices",
+    "resp":"urn:expd.com:arch:core:response",
+    "aphis":"urn:com:expd:customs:us:reports:aphis:lacey",
+    "seform":"urn:com:expd:customs:us:reports:se",
+    "domain":"urn:com:expd:customs:us_entry:domain"
+},
+    
+"symmetrical" : {
+    "TRLHDR" : ["TRL", "HDR"],
+    "AZ" : ["A","Z"],
+    "BY" : ["B","Y"]
+}
 }
 

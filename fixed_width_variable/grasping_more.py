@@ -48,7 +48,13 @@ class ReplaceSections(object):
             identifier = 'TRLHDR'
         else:
             identifier = str(entry[:2])
-        print(identifier)
+        # for symmetrical_lines in dictionary['symmetrical']:
+        #     split = int(len(symmetrical_lines)/2)
+        #     if entry[0:split] == symmetrical_lines[:split] or symmetrical_lines[split:]:
+        #         identifier = symmetrical_lines
+        #     else:
+        #         identifier = str(entry[:2])
+        #TODO: turn this on, just need to get the dictionary figured out. 
         return identifier
 
 
@@ -99,10 +105,10 @@ class ReplaceItAll(ReplaceSections):
         self.mapper = mapper 
 
     def ReplaceEverything(self, mapper):
-        self.replace_chunks_in_XML('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', mapper['aerecs'])
+        #self.replace_chunks_in_XML('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:aeRecs/web:aeData', mapper['aerecs'])
         self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:aceAdditionalDataRecords', mapper['ace_additional'])
         self.replace_chunks_in_XML('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:acsCatairRecords', mapper['acscatair'])
-        self.replace_xml_tag_text('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:values/aphis:Lacey_Form/aphis:', mapper['pgareports'])
-        self.replace_xml_tag_text('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:', mapper['request_body'])
-        self.replace_requestHeader(mapper['request_header'])
+        #self.replace_xml_tag_text('./testResponse/testResponseHttpBody/env:Envelope/env:Body/wrap:load7501FromCatairResponse/wrap:out/web:values/aphis:Lacey_Form/aphis:', mapper['pgareports'])
+        #self.replace_xml_tag_text('./testRequest/testRequestHttpBody/env:Envelope/env:Body/wrap:load7501FromCatair/wrap:in/web:', mapper['request_body'])
+        #self.replace_requestHeader(mapper['request_header'])
 
